@@ -1,0 +1,57 @@
+
+    /* Page : centre le bouton au milieu de l'écran */
+    body {
+      margin: 0;                      /* supprime la marge par défaut du navigateur */
+      min-height: 100vh;              /* la page prend au moins toute la hauteur de la fenêtre */
+      display: flex;                  /* active flexbox pour centrer le contenu */
+      align-items: center;            /* centre verticalement */
+      justify-content: center;        /* centre horizontalement */
+      background: #2b2140;            /* couleur de fond sombre, pour faire ressortir la lueur */
+    }
+
+    /* Bouton : taille, couleur et lueur */
+    .bouton-glow {
+      padding: 18px 40px;             /* espace intérieur : haut/bas 18 px, gauche/droite 40 px */
+      font-size: 22px;                /* taille du texte */
+      font-weight: 700;               /* texte en gras */
+      color: #ffffff;                 /* couleur du texte */
+      background: #6c4cf1;            /* couleur de fond du bouton */
+      border: none;                   /* supprime le contour par défaut */
+      border-radius: 999px;           /* très grand rayon : bouton arrondi en forme de pilule */
+      cursor: pointer;                /* curseur en main au survol */
+      animation: pulse-glow 2s ease-in-out infinite;
+                                      /* nom de l'animation, durée 2 s, courbe douce,
+                                         répétée sans fin */
+      transition: transform 0.2s ease;
+                                      /* transition douce sur transform, en 0,2 s */
+    }
+
+    /* Au survol, le bouton grossit légèrement */
+    .bouton-glow:hover {
+      transform: scale(1.05);         /* agrandit le bouton de 5 % */
+    }
+
+    /* Au clavier (touche Tab), un contour visible apparaît */
+    .bouton-glow:focus-visible {
+      outline: 3px solid #ffc83d;     /* contour de 3 px, de couleur jaune */
+      outline-offset: 4px;            /* espace de 4 px entre le bouton et le contour */
+    }
+
+    /* Animation : la lueur passe de petite à grande, puis revient */
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 10px #6c4cf1,            /* lueur proche, couleur pleine */
+                    0 0 20px rgba(108, 76, 241, 0.4); /* lueur diffuse, transparente */
+      }
+      50% {
+        box-shadow: 0 0 30px #6c4cf1,            /* lueur proche, plus large */
+                    0 0 60px rgba(108, 76, 241, 0.8); /* lueur diffuse, plus opaque */
+      }
+    }
+
+    /* Pour les personnes qui désactivent les animations dans leurs réglages */
+    @media (prefers-reduced-motion: reduce) {
+      .bouton-glow {
+        animation: none;              /* supprime la pulsation */
+      }
+    }
