@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma landing page – à compléter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styleisbe.css">
+
+
+  <!--
+    ============================================================
+    CONSIGNES
+    1. Ton dossier s'appelle cssflex. Il contient deux fichiers : index.html et style.css.
+    2. Lance Live Server (clic droit sur index.html > Open with Live Server).
+    3. Suis les étapes dans l'ordre. Chaque étape est marquée ÉTAPE n.
+    4. Tu écris tout ton CSS dans style.css, pas dans ce fichier index.html.
+    5. Coche chaque étape quand la ligne ✅ correspond à ce que tu vois.
+    ============================================================
+  -->
+
+</head>
+<body>
+
+  <!-- ÉTAPE 1 : le menu collant est le header ci-dessous -->
+  <header>
+    <div class="logo">Le Jardin des Sources</div>
+    <nav>
+      <a href="#offres">Offres</a>
+      <a href="#temoignages">Témoignages</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Un café, des livres, un jardin</h2>
+    <p>Venez lire, travailler ou simplement vous asseoir.</p>
+    <!-- ÉTAPE 4 : le bouton ci-dessous réagit au survol -->
+    <a class="bouton" href="#contact">Réserver une table</a>
+  </section>
+
+  <!-- ÉTAPE 3 : les sélecteurs s'appliquent à cette section -->
+  <section class="offres" id="offres">
+    <h3>Nos offres</h3>
+    <div class="cartes">
+      <!-- ÉTAPE 2 : chaque carte doit recevoir position: relative -->
+      <div class="carte">
+        <h4>Découverte</h4>
+        <div class="prix">6 €</div>
+        <p>Un café et une pâtisserie au choix.</p>
+      </div>
+      <!-- ÉTAPE 2 : ce badge doit se placer sur la carte -->
+      <!-- ÉTAPE 4 : cette carte est inclinée -->
+      <div class="carte mise-en-avant">
+        <span class="badge">Populaire</span>
+        <h4>Lecture</h4>
+        <div class="prix">29 € / mois</div>
+        <p>Accès au salon et une boisson par jour.</p>
+      </div>
+      <div class="carte">
+        <h4>Atelier</h4>
+        <div class="prix">15 €</div>
+        <p>Un atelier d'écriture par mois.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="temoignages" id="temoignages">
+    <h3>Témoignages</h3>
+    <blockquote>
+      <p>« Le meilleur endroit du quartier pour travailler le matin. »</p>
+      <cite>Claire, cliente depuis 2 ans</cite>
+    </blockquote>
+  </section>
+
+  <section class="contact" id="contact">
+    <h3>Contact</h3>
+    <p>Une question, une réservation de groupe ? Écrivez-nous.</p>
+    <a class="bouton" href="mailto:contact@exemple.fr">Nous écrire</a>
+  </section>
+
+  <footer>© 2026 Le Jardin des Sources</footer>
+
+  <!--
+    ============================================================
+    ÉTAPE 5 – AVANT DE PARTIR
+    ✅ Le code passe le validateur sur validator.w3.org (aucune erreur).
+    ✅ Il n'y a pas de !important dans ton CSS.
+    ============================================================
+  -->
+
+</body>
+</html>
