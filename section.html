@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Schedule</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+      background: #eef0f7;
+      font-family: 'Nunito', system-ui, sans-serif;
+    }
+
+    .programme {
+      width: min(92vw, 760px);
+      padding: 28px;
+      background: #f7f8fc;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(30, 30, 60, 0.08);
+    }
+
+    .programme__titre {
+      margin-bottom: 20px;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .programme__liste {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Carte d'un créneau */
+    .creneau {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      border-radius: 16px;
+      color: #3d3d4a;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .creneau--natation  { background: linear-gradient(120deg, #c9ecf9, #7f87dc); }
+    .creneau--yoga      { background: linear-gradient(120deg, #f2f58c, #d6b862); }
+    .creneau--tennis    { background: linear-gradient(120deg, #d4f5d6, #9fe6c4); }
+    .creneau--randonnee { background: linear-gradient(120deg, #fbe2c4, #f08fc0); }
+
+    /* Zone de gauche : date */
+    .creneau__date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 64px;
+    }
+
+    .creneau__jour {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .creneau__nom-jour {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Séparateur vertical */
+    .creneau__separateur {
+      width: 3px;
+      height: 70px;
+      margin: 0 18px;
+      background: #3d3d4a;
+      border-radius: 2px;
+    }
+
+    /* Zone du milieu : titre au-dessus, participants en dessous */
+    .creneau__contenu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .creneau__activite {
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+
+    .creneau__participants {
+      display: flex;
+    }
+
+    .participant {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .participant + .participant {
+      margin-left: -10px;
+    }
+
+    /* Zone de droite : bouton */
+    .creneau__bouton {
+      margin-left: auto;
+      min-width: 150px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #3d3d4a;
+      font-size: 1.1rem;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .creneau__bouton:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .programme {
+        padding: 20px;
+      }
+
+      .programme__titre {
+        font-size: 1.5rem;
+      }
+
+      .creneau {
+        padding: 12px 14px;
+      }
+
+      .creneau__separateur {
+        margin: 0 12px;
+      }
+
+      .creneau__activite {
+        font-size: 1.3rem;
+      }
+
+      .creneau__bouton {
+        min-width: 96px;
+        padding: 10px 16px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="programme">
+    <div class="programme__titre">Weekly Schedule</div>
+
+    <div class="programme__liste">
+
+      <div class="creneau creneau--natation">
+        <div class="creneau__date">
+          <div class="creneau__jour">13</div>
+          <div class="creneau__nom-jour">Mon</div>
+        </div>
+        <div class="creneau__separateur"></div>
+        <div class="creneau__contenu">
+          <div class="creneau__activite">Swimming</div>
+          <div class="creneau__participants">
+            <div class="participant" style="background-image: url('images/avatars/a1.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a2.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a3.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a4.jpg');"></div>
+          </div>
+        </div>
+        <div class="creneau__bouton">Join</div>
+      </div>
+
+      <div class="creneau creneau--yoga">
+        <div class="creneau__date">
+          <div class="creneau__jour">15</div>
+          <div class="creneau__nom-jour">Wed</div>
+        </div>
+        <div class="creneau__separateur"></div>
+        <div class="creneau__contenu">
+          <div class="creneau__activite">Yoga</div>
+          <div class="creneau__participants">
+            <div class="participant" style="background-image: url('images/avatars/a5.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a6.jpg');"></div>
+          </div>
+        </div>
+        <div class="creneau__bouton">Join</div>
+      </div>
+
+      <div class="creneau creneau--tennis">
+        <div class="creneau__date">
+          <div class="creneau__jour">17</div>
+          <div class="creneau__nom-jour">Fri</div>
+        </div>
+        <div class="creneau__separateur"></div>
+        <div class="creneau__contenu">
+          <div class="creneau__activite">Tennis</div>
+          <div class="creneau__participants">
+            <div class="participant" style="background-image: url('images/avatars/a7.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a8.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a9.jpg');"></div>
+          </div>
+        </div>
+        <div class="creneau__bouton">Join</div>
+      </div>
+
+      <div class="creneau creneau--randonnee">
+        <div class="creneau__date">
+          <div class="creneau__jour">18</div>
+          <div class="creneau__nom-jour">Sat</div>
+        </div>
+        <div class="creneau__separateur"></div>
+        <div class="creneau__contenu">
+          <div class="creneau__activite">Hiking</div>
+          <div class="creneau__participants">
+            <div class="participant" style="background-image: url('images/avatars/a10.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a11.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a12.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a13.jpg');"></div>
+            <div class="participant" style="background-image: url('images/avatars/a14.jpg');"></div>
+          </div>
+        </div>
+        <div class="creneau__bouton">Join</div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

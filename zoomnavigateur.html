@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démo : Le Zoom Navigateur (PX vs REM)</title>
+  <style>
+    /* 1. La racine HTML (valeur par défaut = 16px sur la plupart des navigateurs) */
+    html {
+      font-size: 16px; 
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 2rem;
+      color: #1c1e21;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Panneau de contrôle pour simuler le zoom */
+    .controls {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .controls input {
+      width: 60%;
+      cursor: pointer;
+    }
+
+    .zoom-value {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    /* Grille pour comparer les deux cartes */
+    .cards-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 280px;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* --- CARTE 1 : Tout est bloqué en PIXELS --- */
+    .card-px {
+      border: 2px solid #dc3545; /* Bordure rouge */
+    }
+
+    .card-px h3 {
+      font-size: 20px; /* Fixe */
+      margin-top: 0;
+      color: #dc3545;
+    }
+
+    .card-px p {
+      font-size: 14px; /* Fixe */
+      line-height: 20px; /* Fixe */
+    }
+
+    .card-px button {
+      font-size: 14px; /* Fixe */
+      padding: 8px 16px; /* Fixe */
+      border: 1px solid #dc3545;
+      background-color: #fff0f1;
+      color: #dc3545;
+      border-radius: 4px;
+    }
+
+    /* --- CARTE 2 : Tout est fluide en REM --- */
+    .card-rem {
+      border: 0.125rem solid #28a745; /* Bordure verte qui s'adapte aussi ! (2px / 16 = 0.125rem) */
+    }
+
+    .card-rem h3 {
+      font-size: 1.25rem; /* Relatif à la racine (20px / 16) */
+      margin-top: 0;
+      color: #28a745;
+    }
+
+    .card-rem p {
+      font-size: 0.875rem; /* Relatif (14px / 16) */
+      line-height: 1.4rem; /* Relatif */
+    }
+
+    .card-rem button {
+      font-size: 0.875rem; /* Relatif */
+      padding: 0.5rem 1rem; /* Relatif */
+      border: 0.0625rem solid #28a745;
+      background-color: #e8f8ec;
+      color: #28a745;
+      border-radius: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🔎 Simuler le Zoom Navigateur</h1>
+    <p>Bougez le curseur pour simuler ce qui se passe quand un utilisateur zoome (Ctrl +) ou change la taille de police par défaut de son navigateur :</p>
+    
+    <!-- Panneau avec le slider JS -->
+    <div class="controls">
+      <label for="zoomSlider">Taille de police racine (<code>html font-size</code>) : </label>
+      <br><br>
+      <input type="range" id="zoomSlider" min="12" max="32" value="16" step="2">
+      <p>Valeur actuelle : <span class="zoom-value" id="zoomText">16px (100% - Normal)</span></p>
+    </div>
+
+    <!-- Comparaison visuelle -->
+    <div class="cards-grid">
+      
+      <!-- Carte PX -->
+      <div class="card card-px">
+        <h3>Carte en PIXELS (px)</h3>
+        <p>Je suis bloqué ! Même si vous zoomez ou que l'utilisateur a des problèmes de vue, ma taille de texte et mon bouton ne bougent pas.</p>
+        <button>Bouton fixe (14px)</button>
+      </div>
+
+      <!-- Carte REM -->
+      <div class="card card-rem">
+        <h3>Carte en REM (rem)</h3>
+        <p>Je m'adapte ! Dès que le navigateur zoome, mon texte, mes espacements et mon bouton grandissent en parfaite harmonie.</p>
+        <button>Bouton adaptable (0.875rem)</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const slider = document.getElementById('zoomSlider');
+    const zoomText = document.getElementById('zoomText');
+    const htmlElement = document.documentElement;
+
+    slider.addEventListener('input', (e) => {
+      const fontSize = e.target.value;
+      
+      // On modifie dynamiquement la taille de la racine HTML
+      htmlElement.style.fontSize = fontSize + 'px';
+      
+      // Calcul du pourcentage équivalent pour l'explication
+      const percentage = Math.round((fontSize / 16) * 100);
+      zoomText.textContent = `${fontSize}px (${percentage}% de zoom)`;
+    });
+  </script>
+</body>
+</html>

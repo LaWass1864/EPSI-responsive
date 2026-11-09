@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corrigé : Les Épis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fbfbf8;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    /* 1. En-tête et burger : mobile d'abord */
+    .entete {
+      display: flex;
+      flex-wrap: wrap;                      /* le menu passe sous le logo si besoin */
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #1f5f4a;
+      color: #ffffff;
+    }
+
+    .logo {
+      color: #ffffff;
+      font-family: Georgia, serif;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    .burger {
+      min-width: 44px;                      /* cible tactile */
+      min-height: 44px;
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .entete a:focus-visible,
+    .burger:focus-visible {
+      outline: 3px solid #f2a541;
+      outline-offset: 4px;
+    }
+
+    .menu {
+      display: none;                        /* caché sur mobile */
+      width: 100%;                          /* prend toute la ligne quand il s'ouvre */
+    }
+
+    .menu.is-open {
+      display: block;
+    }
+
+    .menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 16px 0;
+    }
+
+    .menu li + li {
+      margin-top: 12px;
+    }
+
+    .menu a {
+      color: #ffffff;
+      font-size: 1.125rem;
+    }
+
+    /* Titres et accueil : tailles en rem et clamp() */
+    #accueil {
+      padding: 24px;
+      min-height: 40vh;                     /* hauteur liée à la fenêtre */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #accueil h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);  /* fluide, borné */
+      color: #1f5f4a;
+      margin: 0 0 12px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #1f5f4a;
+      padding: 0 24px;
+    }
+
+    /* 2. Bento : une colonne sur mobile */
+    .galerie {
+      padding-bottom: 24px;
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-rows: 200px;
+      gap: 12px;
+      padding: 0 24px;
+    }
+
+    .bento figure {
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .bento img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;                    /* remplit la case sans déformer */
+    }
+
+    .bento figcaption {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 4px 8px;
+      background: #1f5f4a;
+      color: #ffffff;
+      font-size: 0.9rem;
+    }
+
+    /* 3. Deux cartes en flex */
+    .offres {
+      padding-bottom: 24px;
+    }
+
+    .deux-cartes {
+      display: flex;
+      flex-wrap: wrap;                      /* passent l'une sous l'autre si la place manque */
+      gap: 24px;
+      padding: 0 24px;
+    }
+
+    .carte {
+      flex: 1 1 300px;                      /* chaque carte prend une part égale */
+      box-sizing: border-box;
+      background: #ffffff;
+      border: 1px solid #e3e6e4;            /* bordure fine, en px */
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .carte h3 {
+      font-size: 1.25rem;
+      color: #1f5f4a;
+      margin: 0 0 8px;
+    }
+
+    /* 4. Footer en deux colonnes : empilées sur mobile */
+    .pied {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 24px;
+      background: #164536;
+      color: #ffffff;
+    }
+
+    .pied h2 {
+      color: #ffffff;
+      padding: 0;
+      font-size: 1.125rem;
+    }
+
+    .pied a {
+      color: #ffffff;
+    }
+
+    .pied .colonne {
+      flex: 1;
+    }
+
+    /* 5. Grand écran : navigation en ligne, bento à 3 colonnes, footer en 2 colonnes */
+    @media (min-width: 768px) {
+      .burger {
+        display: none;
+      }
+
+      .menu {
+        display: block;
+        width: auto;
+      }
+
+      .menu ul {
+        display: flex;
+        gap: 24px;
+        padding: 0;
+      }
+
+      .menu li + li {
+        margin-top: 0;
+      }
+
+      .bento {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .bento .grand {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+
+      .bento .large {
+        grid-column: span 2;
+      }
+
+      .pied {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="entete">
+    <a class="logo" href="#accueil">Les Épis</a>
+
+    <button class="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+
+    <nav class="menu" id="menu">
+      <ul>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#offres">Nos offres</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="accueil">
+      <h1>Boulangerie artisanale</h1>
+      <p>Pain au levain, viennoiseries et café, fabriqués chaque matin.</p>
+    </section>
+
+    <section id="galerie" class="galerie">
+      <h2>Notre galerie</h2>
+      <div class="bento">
+        <figure class="grand">
+          <img src="https://picsum.photos/seed/epis1/800/600" alt="Vitrine remplie de pains dorés">
+          <figcaption>Pains du jour</figcaption>
+        </figure>
+        <figure>
+          <img src="https://picsum.photos/seed/epis2/400/400" alt="Café servi dans une tasse blanche">
+          <figcaption>Café</figcaption>
+        </figure>
+        <figure>
+          <img src="https://picsum.photos/seed/epis3/400/400" alt="Croissants disposés sur une planche">
+          <figcaption>Viennoiseries</figcaption>
+        </figure>
+        <figure class="large">
+          <img src="https://picsum.photos/seed/epis4/800/400" alt="Farine répandue sur un plan de travail">
+          <figcaption>Fabrication</figcaption>
+        </figure>
+        <figure>
+          <img src="https://picsum.photos/seed/epis5/400/400" alt="Gâteau aux fruits sur une assiette">
+          <figcaption>Pâtisserie</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="offres" class="offres">
+      <h2>Nos offres</h2>
+      <div class="deux-cartes">
+        <article class="carte">
+          <h3>Abonnement pain</h3>
+          <p>Une baguette tradition livrée chaque matin, du lundi au vendredi.</p>
+        </article>
+        <article class="carte">
+          <h3>Commande de fête</h3>
+          <p>Gâteaux et plateaux sur commande, à récupérer en boutique.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pied" id="contact">
+    <div class="colonne">
+      <h2>Nous trouver</h2>
+      <p>12 rue du Four, 89000 Auxerre</p>
+    </div>
+    <div class="colonne">
+      <h2>Nous suivre</h2>
+      <p><a href="#accueil">Retour en haut</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Le burger : même logique que le cours
+    const bouton = document.querySelector('.burger');
+    const menu = document.getElementById('menu');
+
+    bouton.addEventListener('click', () => {
+      const ouvert = bouton.getAttribute('aria-expanded') === 'true';
+      bouton.setAttribute('aria-expanded', String(!ouvert));
+      menu.classList.toggle('is-open');
+    });
+  </script>
+</body>
+</html>

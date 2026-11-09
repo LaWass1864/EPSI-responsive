@@ -1,0 +1,42 @@
+body {
+  padding: 16px; /* On laisse un peu d'air autour de la page pour ne pas étouffer le contenu ! 📦 */
+  font-family: Arial, sans-serif; /* On choisit une police propre, lisible et passe-partout 🔤 */
+}
+
+/* Mobile first : image et infos en colonne */
+.fiche {
+  display: flex; /* On active le mode magique Flexbox pour organiser tout ça  */
+  flex-direction: column; /* Tout le monde se met sagement en file indienne (colonne)  */
+  gap: 20px; /* On garde 20px de distance de sécurité entre chaque élément  */
+}
+
+.fiche-image {
+  max-width: 100%; /* L'image ne dépassera jamais de son conteneur, promis juré  */
+  height: auto; /* Elle garde ses proportions d'origine sans faire sa tête de mule  */
+  display: block; /* On transforme l'image en bloc pour éviter les petits bugs d'espacement bizarres 🧱 */
+}
+
+.fiche-infos {
+  display: flex; /* Mode Flexbox activé aussi pour les infos !  */
+  flex-direction: column; /* On empile les textes et boutons les uns sous les autres  */
+  gap: 12px; /* Un petit espace douillet de 12px entre chaque info  */
+}
+
+button {
+  min-height: 44px; /* Hauteur minimale de 44px : parfait pour les gros doigts sur mobile  */
+  font-size: 18px; /* Un texte bien visible pour qu'on ait envie de cliquer dessus  */
+}
+
+/* À partir de 768 px : image et infos côte à côte */
+@media (min-width: 768px) {
+  .fiche {
+    flex-direction: row; /* Sur grand écran, tout ce beau monde se met côte à côte (en ligne)  */
+    align-items: center; /* Tout le monde s'aligne bien sagement au milieu verticalement  */
+  }
+
+  .fiche-image,
+  .fiche-infos {
+    flex: 1; /* L'image et les infos se partagent l'espace à 50/50 comme des bons copains  */
+    min-width: 0; /* Évite qu'un texte trop long ne vienne casser la mise en page */
+  }
+}

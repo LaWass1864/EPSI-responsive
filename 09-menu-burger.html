@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démo : Menu Burger Responsive</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+
+    /* --- BARRE DE NAVIGATION (LAYOUT PAR DÉFAUT / DESKTOP) --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 1rem 2rem; /* 1rem = fluide pour l'accessibilité ! */
+      color: white;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* Menu de liens */
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    /* Bouton Burger (Caché sur ordinateur par défaut) */
+    .burger-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* --- BREAKPOINT MOBILE (Sous 768px) --- */
+    @media (max-width: 768px) {
+      
+      /* 1. On affiche le bouton burger */
+      .burger-btn {
+        display: block;
+      }
+
+      /* 2. On masque le menu sous forme de colonne volante */
+      .nav-links {
+        display: none; /* Caché par défaut */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #826262;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        gap: 1rem;
+      }
+
+      /* 3. Classe JS qui réaffiche le menu quand on clique sur le burger */
+      .nav-links.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">MonSite</div>
+    
+    <!-- Bouton Burger (Icône ☰) -->
+    <button class="burger-btn" id="burgerBtn" aria-label="Ouvrir le menu">☰</button>
+
+    <!-- Liste de liens -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Accueil</a></li>
+      <li><a href="#">Cours</a></li>
+      <li><a href="#">Tarifs</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main style="padding: 2rem; text-align: center;">
+    <h2>Démonstration du Menu Burger 🍔</h2>
+    <p>Redimensionnez la fenêtre du navigateur pour voir le menu passer d'une ligne horizontale à un burger !</p>
+  </main>
+
+  <script>
+    const burgerBtn = document.getElementById('burgerBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    // Quand on clique sur le burger, on bascule la classe 'active'
+    burgerBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>

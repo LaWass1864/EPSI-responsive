@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popular Activities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section class="activities">
+    <h2 class="activities__title">Popular Activities</h2>
+
+    <div class="bento">
+      <figure class="tile tile--tennis">
+        <img src="images/tennis.jpg" alt="Deux joueurs de tennis">
+        <figcaption>Tennis</figcaption>
+      </figure>
+
+      <figure class="tile tile--cycling">
+        <img src="images/cycling.jpg" alt="Cycliste sur un chemin forestier">
+        <figcaption>Cycling</figcaption>
+      </figure>
+
+      <figure class="tile tile--yoga">
+        <img src="images/yoga.jpg" alt="Femme en position de yoga">
+        <figcaption>Yoga</figcaption>
+      </figure>
+
+      <figure class="tile tile--hiking">
+        <img src="images/hiking.jpg" alt="Randonneuse assise au sommet">
+        <figcaption>Hiking</figcaption>
+      </figure>
+
+      <!-- Visible uniquement sur PC -->
+      <figure class="tile tile--wide tile--swimming">
+        <img src="images/swimming.jpg" alt="Nageur en piscine">
+        <figcaption>Swimming</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</body>
+</html>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #eef0f7;
+  font-family: 'Nunito', system-ui, sans-serif;
+}
+
+.activities {
+  width: min(92vw, 760px);
+  padding: 28px;
+  background: #f7f8fc;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(30, 30, 60, 0.08);
+}
+
+.activities__title {
+  margin: 0 0 24px;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #111;
+}
+
+/* Desktop : 40 % / 40 % / 20 % */
+.bento {
+  display: grid;
+  grid-template-columns: 4fr 4fr 2fr;
+  grid-auto-rows: 210px;
+  gap: 16px;
+}
+
+.tile {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(88, 40, 175, 0.75) 0%,
+    rgba(88, 40, 175, 0.25) 55%,
+    rgba(88, 40, 175, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.tile figcaption {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  z-index: 1;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.tile:hover img { transform: scale(1.05); }
+
+.tile--wide { grid-column: span 2; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .activities { padding: 20px; }
+
+  .activities__title {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+  }
+
+  .bento {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 180px;
+    gap: 12px;
+  }
+
+  .tile--wide { display: none; }
+
+  .tile--hiking { order: 3; }
+  .tile--yoga   { order: 4; }
+
+  .tile figcaption {
+    right: 12px;
+    bottom: 10px;
+    font-size: 1.1rem;
+  }
+}
+</style>

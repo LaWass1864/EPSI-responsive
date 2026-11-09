@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unité %</title>
+  <style>
+    /*
+      % : relatif à l'élément parent.
+      Question à se poser : « Ça doit occuper une part du bloc qui le contient ? »
+      Usage : largeur de colonnes, d'images, de blocs.
+    */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    .colonnes {
+      display: flex;              /* le parent : sa largeur sert de référence */
+    }
+
+    .colonne {
+      box-sizing: border-box;
+      width: 50%;                 /* 50 % de la largeur de .colonnes */
+      padding: 16px;
+      border: 1px solid #1f5f4a;
+    }
+  </style>
+</head>
+<body>
+  <h1>Unité %</h1>
+  <p>Chaque colonne prend 50 % de la largeur de son parent. Réduisez la fenêtre : elles rétrécissent aussi.</p>
+  <div class="colonnes">
+    <div class="colonne">Colonne 1</div>
+    <div class="colonne">Colonne 2</div>
+  </div>
+</body>
+</html>

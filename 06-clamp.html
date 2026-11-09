@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fonction clamp()</title>
+  <style>
+    /*
+      CLAMP(minimum, valeur idéale, maximum)
+      - minimum : la taille ne descend jamais en dessous
+      - valeur idéale : elle suit l'écran entre les deux
+      - maximum : elle ne dépasse jamais
+      Question à se poser : « Ça doit grandir avec l'écran, sans devenir illisible ou énorme ? »
+    */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);  /* 32 px mini · 5vw · 64 px maxi */
+      border: 2px solid #1f5f4a;    /* bordure du titre fluide */
+      color: #1f5f4a;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vélos Lumière</h1>
+  <p>Réduisez la fenêtre puis agrandissez-la : le titre suit l'écran, sans jamais sortir de ses bornes.</p>
+  <!-- Repère en px : taille fixe, pour comparer -->
+  <div style="width: 300px; padding: 8px; border: 1px solid #1f5f4a;">Repère px : 300 px fixes</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibilité</title>
+  <style>
+    /*
+      ACCESSIBILITÉ : une page utilisable par tous (clavier, lecteur d'écran, zoom, faible vision).
+      Question à se poser : « Quelqu'un qui ne voit pas bien, ou qui n'utilise pas la souris, peut-il tout faire ? »
+    */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    /* 1. CONTRASTE : texte foncé sur fond clair (au moins 4,5:1) */
+    .bon-contraste {
+      background: #ffffff;
+      color: #1a1a1a;
+      border: 2px solid #1f5f4a;    /* bon contraste */
+      padding: 16px;
+    }
+
+    .mauvais-contraste {          /* à éviter : gris clair sur blanc */
+      background: #ffffff;
+      color: #b0b0b0;
+      border: 2px dashed #b0b0b0;   /* mauvais contraste */
+      padding: 16px;
+    }
+
+    /* 2. CIBLES TACTILES : au moins 44 px pour cliquer ou toucher */
+    .bouton {
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0.75em 1.25em;
+      font-size: 1rem;
+      background: #1f5f4a;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+    }
+
+    /* 3. FOCUS VISIBLE : l'utilisateur au clavier doit voir où il se trouve */
+    .bouton:focus-visible {
+      outline: 3px solid #f2a541;
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 4. TITRES dans l'ordre : un seul h1, puis h2, puis h3 -->
+  <h1>Accessibilité</h1>
+
+  <h2>Contraste</h2>
+  <p class="bon-contraste">Ce texte est lisible : contraste suffisant.</p>
+  <p class="mauvais-contraste">Ce texte est difficile à lire : contraste trop faible.</p>
+
+  <h2>Images</h2>
+  <!-- 5. ALT : décrire le contenu de l'image pour un lecteur d'écran -->
+  <img src="https://picsum.photos/seed/velo/300/200" alt="Vélo de ville rouge garé devant un café">
+  <!-- Image décorative : alt vide, le lecteur d'écran l'ignore -->
+  <img src="https://picsum.photos/seed/deco/300/40" alt="">
+
+  <h2>Boutons et focus</h2>
+  <p>Appuyez sur la touche Tab pour parcourir les boutons : le contour orange doit apparaître.</p>
+  <button class="bouton">Réserver</button>
+  <button class="bouton">Ajouter au panier</button>
+</body>
+</html>

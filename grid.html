@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid : la grille en bento</title>
+  <style>
+    /*
+      CSS GRID : une grille de lignes et de colonnes.
+      1. On déclare la grille avec display: grid.
+      2. On décrit les colonnes avec grid-template-columns.
+      3. Chaque enfant se place dans une case, ou s'étale sur plusieurs cases.
+
+      Question à se poser : « Je veux placer des blocs en lignes et en colonnes,
+      et certains doivent prendre plus de place que d'autres. »
+    */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #fbfbf8;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    h1 {
+      font-family: Georgia, serif;
+      color: #1f5f4a;
+      font-size: 2rem;
+      margin: 0 0 8px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #1f5f4a;
+      margin: 40px 0 12px;
+    }
+
+    .note {
+      background: #ffffff;
+      border: 1px solid #e3e6e4;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    /* ---------- Exemple 1 : une grille simple de 3 colonnes ---------- */
+
+    .grille-simple {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);   /* 3 colonnes de même largeur : 1 fr = 1 part */
+      gap: 12px;                               /* espace entre les cases */
+    }
+
+    /* ---------- Exemple 2 : une case qui s'étale ---------- */
+
+    .etale {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .etale .large {
+      grid-column: span 2;                     /* cette case prend 2 colonnes */
+    }
+
+    /* ---------- Exemple 3 : le bento (mobile d'abord) ---------- */
+
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr;              /* par défaut : une seule colonne sur mobile */
+      grid-auto-rows: 140px;                   /* chaque ligne automatique fait 140 px */
+      gap: 12px;
+    }
+
+    .bento > div {
+      background: #1f5f4a;
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    .bento .couleur-2 { background: #2b6d57; }
+    .bento .couleur-3 { background: #f2a541; color: #1a1a1a; }
+    .bento .couleur-4 { background: #c8553d; }
+
+    /* À partir de 768 px : 3 colonnes, avec des cases qui s'étalent */
+    @media (min-width: 768px) {
+      .bento {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .bento .grand {
+        grid-column: span 2;                   /* 2 colonnes de large */
+        grid-row: span 2;                      /* 2 lignes de haut */
+      }
+
+      .bento .large {
+        grid-column: span 2;                   /* 2 colonnes, 1 ligne */
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Grid : la grille en bento</h1>
+  <p class="note">Une grille, c'est un tableau de cases. Le CSS décide combien de colonnes, et chaque élément choisit sa place.</p>
+
+  <h2>1. Une grille simple</h2>
+  <p>Trois colonnes égales. Chaque case prend une colonne.</p>
+  <div class="grille-simple">
+    <div>Case 1</div>
+    <div>Case 2</div>
+    <div>Case 3</div>
+  </div>
+
+  <h2>2. Une case qui s'étale</h2>
+  <p>La case « large » prend deux colonnes au lieu d'une.</p>
+  <div class="note">
+    <p><strong>D'où vient « span 2 » ?</strong> C'est la syntaxe de <strong>grid-column</strong>. « span 2 » veut dire : « s'étale sur 2 colonnes, à partir de l'endroit où la case se place ».</p>
+    <p>On peut écrire la même chose avec des bornes : <strong>grid-column: 1 / 3;</strong>. La case part de la ligne 1 et s'arrête à la ligne 3, donc elle occupe 2 colonnes. Les lignes sont numérotées à partir de 1.</p>
+  </div>
+  <div class="etale">
+    <div class="large">Case large : grid-column: span 2</div>
+    <div>Case 3</div>
+    <div>Case 4</div>
+    <div>Case 5</div>
+  </div>
+
+  <h2>3. Le bento</h2>
+  <p>Sur mobile, les cases s'empilent. À partir de 768 px, la grille passe en 3 colonnes et certaines cases deviennent plus grandes.</p>
+  <div class="bento">
+    <div class="grand">Grand bloc : 2 × 2 cases</div>
+    <div class="couleur-2">Bloc 2</div>
+    <div class="couleur-3">Bloc 3</div>
+    <div class="large couleur-4">Bloc large : 2 colonnes</div>
+    <div>Bloc 5</div>
+  </div>
+</body>
+</html>

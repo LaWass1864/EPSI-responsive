@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unité rem</title>
+  <style>
+    /*
+      REM : relatif à la racine (l'élément html), 16 px par défaut.
+      Question à se poser : « Ça doit suivre la taille de texte choisie par l'utilisateur ? »
+      Usage : tailles de texte, marges générales.
+    */
+    html {
+      font-size: 100%;            /* 16 px par défaut, réglage du navigateur */
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1.5rem;            /* 24 px, suit la racine */
+    }
+
+    h1 {
+      font-size: 2rem;            /* 2 × 16 px = 32 px */
+      border: 2px solid #1f5f4a;    /* bordure du titre */
+    }
+
+    p {
+      font-size: 1rem;            /* 16 px */
+      border: 1px dashed #f2a541;   /* bordure du paragraphe */
+    }
+  </style>
+</head>
+<body>
+  <h1>Unité rem</h1>
+  <p>Ce texte utilise 1rem. Dans les paramètres de votre navigateur, augmentez la taille de police par défaut : le texte grandit aussi.</p>
+  <!-- Repère en px : taille fixe, pour comparer -->
+  <div style="width: 300px; padding: 8px; border: 1px solid #1f5f4a;">Repère px : 300 px fixes</div>
+</body>
+</html>

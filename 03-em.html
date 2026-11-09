@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unité em</title>
+  <style>
+    /*
+      EM : relatif à la taille de police de l'élément (ou de son parent pour font-size).
+      Question à se poser : « Ça doit grandir avec le texte de ce composant ? »
+      Usage : padding d'un bouton, espace autour d'un texte.
+    */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    .parent {
+      font-size: 20px;            /* taille de référence du parent */
+      border: 2px dashed #1f5f4a;   /* bordure du parent */
+    }
+
+    .enfant {
+      font-size: 1.25em;          /* 1,25 × 20 px = 25 px */
+      border: 1px solid #f2a541;    /* bordure de l'enfant */
+    }
+
+    .bouton {
+      font-size: 1rem;            /* 16 px */
+      padding: 0.75em 1.5em;      /* proportionnel à la taille du texte du bouton */
+      border: 2px solid #1f5f4a;
+      background: #1f5f4a;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Unité em</h1>
+  <div class="parent">
+    <p class="enfant">Ce texte fait 1,25 fois la taille de son parent.</p>
+  </div>
+  <p>Le bouton ci-dessous a un espace intérieur en em : si vous augmentez sa taille de texte, il grandit proportionnellement.</p>
+  <button class="bouton">Bouton</button>
+  <!-- Repère en px : taille fixe, pour comparer -->
+  <div style="width: 300px; padding: 8px; border: 1px solid #1f5f4a;">Repère px : 300 px fixes</div>
+</body>
+</html>

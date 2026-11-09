@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unité px</title>
+  <style>
+    /*
+      PX : taille fixe, en pixels.
+      Question à se poser : « Ça doit toujours faire exactement cette taille ? »
+      Usage : bordures, ombres, petites icônes.
+    */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    .carte {
+      box-sizing: border-box;
+      width: 300px;               /* largeur fixe : ne change pas avec la fenêtre */
+      padding: 16px;              /* espace intérieur fixe */
+      border: 1px solid #1f5f4a;  /* bordure fine et nette */
+    }
+  </style>
+</head>
+<body>
+  <h1>Unité px</h1>
+  <p>La carte garde 300 px de large, quelle que soit la taille de la fenêtre.</p>
+  <div class="carte">Carte à largeur fixe</div>
+</body>
+</html>

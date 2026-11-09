@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyframes : avec ou sans 0 % et 100 %</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #2b2140;
+      color: #ffffff;
+      line-height: 1.5;
+    }
+
+    h1 {
+      font-family: Georgia, serif;
+      font-size: 1.75rem;
+      margin: 0 0 8px;
+    }
+
+    .exemples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 24px;
+    }
+
+    .cas {
+      text-align: center;
+      max-width: 520px;
+      flex: 1 1 320px;
+    }
+
+    .cas p {
+      margin-bottom: 24px;
+    }
+
+    .cas button {
+      margin-bottom: 24px;
+    }
+
+    /* Bloc de code sous chaque bouton */
+    .code {
+      text-align: left;
+      background: #1f2a26;
+      color: #fbfbf8;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    /* Version 1 : 0 % et 100 % écrits */
+    .bouton-avec {
+      padding: 18px 40px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      background: #6c4cf1;
+      border: none;
+      border-radius: 999px;
+      animation: pulse-avec 2s infinite;
+    }
+
+    @keyframes pulse-avec {
+      0%, 100% { box-shadow: 0 0 10px #6c4cf1; }   /* début et fin */
+      50%      { box-shadow: 0 0 30px #6c4cf1; }   /* milieu */
+    }
+
+    /* Version 2 : 0 % et 100 % absents, le style normal sert de départ et d'arrivée */
+    .bouton-sans {
+      padding: 18px 40px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      background: #6c4cf1;
+      border: none;
+      border-radius: 999px;
+      box-shadow: 0 0 10px #6c4cf1;        /* style normal : départ et arrivée */
+      animation: pulse-sans 2s infinite;
+    }
+
+    @keyframes pulse-sans {
+      50% { box-shadow: 0 0 30px #6c4cf1; }  /* seul le milieu est écrit */
+    }
+  </style>
+</head>
+<body>
+  <h1>Keyframes : avec ou sans 0 % et 100 % ?</h1>
+  <p>Les deux boutons font exactement la même animation.</p>
+
+  <div class="exemples">
+    <div class="cas">
+      <p><strong>Avec 0 % et 100 %</strong></p>
+      <button class="bouton-avec">Bouton</button>
+      <pre class="code">@keyframes pulse-avec {
+  0%, 100% { box-shadow: 0 0 10px #6c4cf1; }
+  50%      { box-shadow: 0 0 30px #6c4cf1; }
+}</pre>
+    </div>
+
+    <div class="cas">
+      <p><strong>Sans 0 % ni 100 %</strong></p>
+      <button class="bouton-sans">Bouton</button>
+      <pre class="code">@keyframes pulse-sans {
+  50% { box-shadow: 0 0 30px #6c4cf1; }
+}</pre>
+    </div>
+  </div>
+</body>
+</html>

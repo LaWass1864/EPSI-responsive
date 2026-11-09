@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Images fluides</title>
+  <style>
+    /*
+      IMAGE FLUIDE : elle s'adapte à la largeur de son conteneur.
+      Question à se poser : « Cette image doit-elle rester dans sa case quand l'écran rétrécit ? »
+
+      max-width: 100%  → l'image ne dépasse jamais son conteneur
+      height: auto     → elle garde ses proportions (pas de déformation)
+      display: block   → supprime l'espace parasite sous l'image
+    */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    .photo {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border: 2px solid #1f5f4a;    /* bordure de l'image */
+    }
+
+    /* Réserver la place avant le chargement, pour éviter que la page saute */
+    .carte-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;       /* proportions 16:9 réservées à l'avance */
+      border: 2px dashed #f2a541;   /* bordure de la case */
+      overflow: hidden;
+    }
+
+    /* object-fit : recadre l'image dans la case sans la déformer */
+    .carte-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;          /* remplit la case, quitte à couper les bords */
+    }
+  </style>
+</head>
+<body>
+  <h1>Images fluides</h1>
+
+  <h2>1. Une image qui rétrécit avec son conteneur</h2>
+  <p>Réduisez la fenêtre : l'image diminue, mais ne sort jamais de la page.</p>
+  <img class="photo" src="https://picsum.photos/seed/velo/800/450" alt="Vélo de ville au soleil">
+
+  <h2>2. Une case 16:9, recadrée proprement</h2>
+  <p>La case garde toujours le même format. L'image est recadrée au centre (object-fit: cover).</p>
+  <div class="carte-image">
+    <img src="https://picsum.photos/seed/route/800/600" alt="Route de campagne au printemps">
+  </div>
+</body>
+</html>
