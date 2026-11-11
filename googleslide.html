@@ -10,7 +10,8 @@
   body { margin: 0; background: var(--bg); color: var(--fg); font-family: "IBM Plex Sans", Arial, sans-serif; font-size: 16px; line-height: 1.5; padding: 24px 16px 48px; }
   main { max-width: 720px; margin: 0 auto; }
   h1 { font-family: "Source Serif 4", Georgia, serif; font-size: 32px; line-height: 1.2; margin: 0 0 8px; }
-  .intro { color: var(--muted); margin: 0 0 24px; }
+  .intro { color: var(--muted); margin: 0 0 16px; }
+  .notice { background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin: 0 0 24px; font-size: 15px; }
   h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 28px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
   ul { list-style: none; margin: 0; padding: 0; }
   li { border-bottom: 1px solid var(--rule); }
@@ -19,44 +20,40 @@
   .step { min-width: 0; }
   .slide { display: inline-block; font-size: 13px; font-weight: 600; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0 8px; margin-right: 6px; white-space: nowrap; }
   .why { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
+  .new { font-size: 12px; font-weight: 600; color: var(--fg); background: var(--card); border: 1px solid var(--rule); border-radius: 4px; padding: 0 6px; margin-left: 6px; }
   @media print { body { padding: 0; } h2 { break-after: avoid; } li { break-inside: avoid; } }
 </style>
 </head>
 <body>
 <main>
   <h1>To-do corrections Google Slides</h1>
-  <p class="intro">Présentation de la Résidence Galéa à corriger avant jeudi 12/11. Cochez chaque point une fois corrigé.</p>
+  <p class="intro">Présentation de la Résidence Galéa, version mise à jour. Cochez chaque point une fois corrigé. Les points déjà faits ont été retirés.</p>
+  <p class="notice"><strong>Pas de nouveau passage au tableau.</strong> La correction se fait en autonomie, pendant 30 minutes. La formatrice vérifiera les points cochés en passant voir chaque groupe.</p>
 
   <h2>1. Contenu</h2>
   <ul>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 2</span>Corriger la tranche de dépendance<span class="why">« niveau 6 et 3 » est inversé et imprécis : la grille AGGIR va de 1 à 6.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 2</span>Corriger les fautes<span class="why">« Chaque chambres » devient « Chaque chambre » ; « propice » est à vérifier dans la phrase sur les terrasses.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 3</span>Vérifier et justifier l'âge minimum<span class="why">44 ans : une structure pour personnes âgées accueille en général à partir de 60 ans.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 3</span>Corriger « FITNESS » en « FINESS »<span class="why">Le numéro FINESS doit apparaître avec ce nom exact.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 4</span>Vérifier le seuil d'accessoire<span class="why">80 011 € correspond à 2025 : vérifier le montant pour l'année en cours.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 5</span>Corriger les missions<span class="why">« Proposer des activités quotidiens » est une faute d'accord. Harmonisez la forme des trois missions (une phrase, un nom, un verbe).</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 6</span>Supprimer le doublon<span class="why">« Confidentialité » et « Écoute et confidentialité » figurent deux fois.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 11</span>Préciser le prix de location<span class="why">« 1600 € m2 » : indiquer s'il s'agit d'un prix mensuel ou annuel.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 11</span>Expliciter l'exonération<span class="why">« Exonération possible : CCAS » est peu clair : préciser ce que couvre le CCAS.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 12</span>Ne pas répéter l'objectif<span class="why">« Continuer le maintien de l'autonomie » apparaît pour l'établissement et pour la santé.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Toutes</span>Choisir une seule graphie du nom<span class="why">Galéa, GALEA ou GAÉLA : garder la même partout.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 13</span>Vérifier la photo<span class="why">Elle doit correspondre à la structure, ou être remplacée.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 3</span>Harmoniser la tranche de dépendance<span class="why">La diapositive 3 indique « niveau 6 et 3 », la diapositive 4 « niveau 3 à 6 ». Écrire la même chose partout : « niveau 3 à 6 ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 3</span>Revoir « Adulte âgée entre 44 et + »<span class="why">Écrire « Personnes âgées à partir de 44 ans » pour rester cohérent avec la diapositive 4 et la note de la diapositive 8.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 2</span>Corriger les fautes<span class="why">« toute personnes » devient « toutes les personnes » ; « au saint de sa maison » devient « au sein de sa maison ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 4</span>Corriger les fautes<span class="why">« Salle de bain » devient « Salles de bains » ; « chambre seul » devient « chambre seule » ; « Intégré » devient « Intégrée ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 6</span>Corriger les missions<span class="why">« Proposer des activités quotidiens » devient « Proposer des activités quotidiennes ». Mettre les trois missions dans la même forme (une phrase ou un nom, avec une majuscule).</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 7</span>Supprimer le doublon<span class="why">« Confidentialité » et « Écoute et confidentialité » figurent deux fois. En garder une seule.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 9</span>Corriger les espaces et les accords<span class="why">« écouté,participer » devient « écouté, participer ». Même correction dans « maintenir,des » et « accompagner ,surveiller ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 14</span>Vérifier la frise<span class="why">« Location d'un TPMR pour la 1er expédition des monuments de la Réunion » ne correspond pas à une résidence : le texte est peut-être recopié d'un autre projet. Corriger aussi « Recrutement médical primordiale », « Améliorer le corps médicale », « Augmenter les recettes à 60 000 l'année ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 13</span>Corriger les fautes<span class="why">« Équipe médical complète » devient « Équipe médicale complète » ; « Suivie médical » devient « Suivi médical ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 15</span>Unifier le nom<span class="why">Choisir une seule graphie : Galéa, GALEA ou GAÉLA. La diapositive 15 utilise encore « RÉSIDENCE GAÉLA ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Toutes</span>Vérifier les chiffres<span class="why">Le seuil d'accessoire (81 051 € pour 2026) est à confirmer sur un site officiel. Vérifier aussi « 1600 € m2 » : indiquer l'unité (par mois, par m²).</span></span></label></li>
   </ul>
 
   <h2>2. Design</h2>
   <ul>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 2</span>Ajouter une photo et des icônes<span class="why">Photo de la façade, et une icône pour chacune des trois idées clés.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 3</span>Présenter l'identité en cartes<span class="why">Une icône par ligne : bâtiment, adresse, statut, téléphone, FINESS, SIRET.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 3</span>Ajouter une capture Google Maps<span class="why">Avec « Source : Google Maps » en bas de la diapositive.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 4</span>Icônes pour le statut et le seuil<span class="why">Mettre 80 011 € en valeur.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 5-6</span>Une icône par mission et par valeur<span class="why">Taille de texte uniforme sur les deux diapositives.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 7</span>Pictogrammes du public<span class="why">Deux pictogrammes (autonome, dépendante) et la source en pied de page.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 8</span>Icônes du tableau<span class="why">Une icône par ligne, cellules aérées.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 9</span>Icônes de l'offre<span class="why">Une icône par bloc ; agrandir les puces et supprimer le chevauchement.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 10</span>Icônes des moyens<span class="why">Quatre icônes ; corriger le débordement du titre « Moyens organisationnels ».</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 11</span>Mettre en valeur le budget<span class="why">Lignes clés en évidence et une barre recettes / plafond.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 12</span>Icônes ou frise des objectifs<span class="why">Une icône par domaine, ou une frise : aujourd'hui, six mois, un an.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="step"><span class="slide">Toutes</span>Harmoniser la mise en page<span class="why">Même palette, mêmes marges, même police. Images libres de droits ou autorisées, sans résident identifiable.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 9</span>Ajouter les icônes du tableau<span class="why">Une icône à côté de « Personnes autonomes » et de « Personnes dépendantes ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 10</span>Corriger les puces de l'offre<span class="why">Les puces de « Hébergement » et « Vie sociale » se chevauchent encore. Agrandir l'espace entre les lignes, et ajouter une icône par bloc.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 11</span>Corriger le titre qui déborde<span class="why">« Moyens organisationnels » sort encore de la diapositive à droite. Réduire la taille ou décaler le titre. Ajouter quatre icônes pour les quatre blocs.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 3</span>Vérifier la carte<span class="why">La capture Google Maps est en place : ajouter « Source : Google Maps » en bas de la diapositive.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 6-7</span>Une icône par mission et par valeur<span class="why">Les numéros seuls ne suffisent pas. Taille de texte uniforme sur les deux diapositives.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Diap. 14</span>Harmoniser la frise<span class="why">Trois colonnes et trois flèches : aligner les puces, et garder la même taille de police dans chaque colonne.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><span class="slide">Toutes</span>Harmoniser la mise en page<span class="why">Même palette, mêmes marges, même police. Les images doivent être libres de droits ou autorisées, sans résident identifiable.</span></span></label></li>
   </ul>
 </main>
 </body>
