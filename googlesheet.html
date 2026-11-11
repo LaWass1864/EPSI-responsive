@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>To-do Google Sheets</title>
+<style>
+  :root { --bg: #FBFBF8; --fg: #14213D; --muted: #4A5568; --rule: #D9DEE3; --accent: #0F766E; --card: #FFFFFF; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: "IBM Plex Sans", Arial, sans-serif; font-size: 16px; line-height: 1.5; padding: 24px 16px 48px; }
+  main { max-width: 720px; margin: 0 auto; }
+  h1 { font-family: "Source Serif 4", Georgia, serif; font-size: 32px; line-height: 1.2; margin: 0 0 8px; }
+  .intro { color: var(--muted); margin: 0 0 24px; }
+  h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 28px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { border-bottom: 1px solid var(--rule); }
+  label { display: flex; gap: 12px; align-items: flex-start; padding: 12px 2px; cursor: pointer; }
+  input[type="checkbox"] { flex: none; width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); }
+  .step { min-width: 0; }
+  .step strong { display: block; font-weight: 600; }
+  .why { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.95em; background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 1px 6px; overflow-wrap: anywhere; }
+  .tip { background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin: 12px 0 4px; color: var(--muted); font-size: 15px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>To-do Google Sheets</h1>
+  <p class="intro">Séance du jeudi 12/11. Cochez chaque étape une fois réalisée. Fichier à nommer prenom-nom-budget.</p>
+
+  <h2>1. Créer le fichier</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Créer une feuille de calcul</strong><span class="why">Fichier &gt; Nouveau &gt; Feuille de calcul. Elle s'enregistre dans Mon Drive.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>La nommer prenom-nom-budget</strong><span class="why">Cliquez sur le titre « Feuille de calcul sans titre » en haut à gauche et tapez le nom.</span></span></label></li>
+  </ul>
+
+  <h2>2. Créer le tableau</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Taper les en-têtes en B2, C2 et D2</strong><span class="why">B2 : Nom (lettres), C2 : Poste (lettres), D2 : Montant (chiffres). Les en-têtes donnent le sens de chaque colonne.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Saisir les lignes 3 à 6</strong><span class="why">Noms et postes en lettres. Montants en chiffres seuls, sans espace ni €, sinon les formules de calcul ne les prennent pas en compte. Passez à la cellule suivante avec Tab ou les flèches.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Mettre les en-têtes en gras</strong><span class="why">Sélectionnez B2:D2, puis cliquez sur G dans la barre d'outils. Cela distingue les en-têtes des données.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Élargir une colonne si le texte est coupé</strong><span class="why">Double-cliquez sur la ligne qui sépare deux lettres de colonnes (par exemple entre B et C).</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Calculer le total en D7</strong><span class="why">Tapez <code>=SOMME(D3:D6)</code>. SOMME additionne toutes les cellules de la plage D3 à D6. Résultat attendu : 9 900.</span></span></label></li>
+  </ul>
+
+  <h2>3. Calculer des statistiques sur les montants</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Calculer la moyenne en D8</strong><span class="why">Tapez <code>=MOYENNE(D3:D6)</code>. Elle divise le total par le nombre de montants. Résultat attendu : 2 475.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Trouver le montant le plus élevé en D9</strong><span class="why">Tapez <code>=MAX(D3:D6)</code>. Résultat attendu : 2 600.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Trouver le montant le plus bas en D10</strong><span class="why">Tapez <code>=MIN(D3:D6)</code>. Résultat attendu : 2 300.</span></span></label></li>
+  </ul>
+
+  <h2>4. Fixer une cellule avec $</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Saisir le taux</strong><span class="why">En F2, tapez « Taux ». En F3, tapez <code>0,1</code> (soit 10 %). C'est la valeur que toutes les lignes vont utiliser.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Calculer le montant de Marie en E3</strong><span class="why">Tapez <code>=D3*$F$3</code>. Le $ devant F et devant 3 bloque la cellule : elle ne bougera pas quand on recopie la formule. Résultat attendu : 250.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Recopier la formule de E3 vers E4, E5 et E6</strong><span class="why">Chaque ligne multiplie son propre montant (D4, D5, D6) par le même taux F3. Résultats attendus : 260, 230, 250.</span></span></label></li>
+  </ul>
+  <div class="tip">Si Sheets affiche une « Suggestion de saisie automatique » avec des valeurs grisées, ce ne sont pas vos formules : cliquez sur ✕ ou appuyez sur Échap pour la refuser. Pour recopier, cliquez sur la cellule d'origine, faites Ctrl+C, sélectionnez la plage de destination et faites Ctrl+V.</div>
+
+  <h2>5. Filtrer et tester une condition</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Activer le filtre sur le tableau</strong><span class="why">Sélectionnez B2:D6, puis cliquez sur Données &gt; Créer un filtre. Une flèche apparaît dans chaque en-tête : elle sert à trier ou n'afficher que certaines valeurs. Le filtre ne supprime aucune donnée.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Écrire la condition en G3</strong><span class="why">Tapez <code>=SI(D3&gt;2400;"Élevé";"Faible")</code>. SI teste la condition (montant supérieur à 2 400) : si elle est vraie, la cellule affiche « Élevé », sinon « Faible ». Résultat attendu : Élevé pour Marie.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Recopier la condition de G3 vers G4, G5 et G6</strong><span class="why">Refusez la suggestion automatique, puis copiez G3 et collez sur G4:G6. Résultats attendus : Élevé, Faible, Élevé. G7 à G10 doivent rester vides.</span></span></label></li>
+  </ul>
+
+  <h2>6. Vérifier avant de partir</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Contrôler les résultats</strong><span class="why">Comparez chaque cellule avec les valeurs indiquées ci-dessus. Une erreur comme #NOM? ou #VALEUR! signifie qu'une formule est mal écrite ou qu'un montant est saisi comme texte.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Vérifier que le fichier est dans Mon Drive</strong><span class="why">Le message « Enregistré dans Drive » apparaît en haut. Le fichier doit être retrouvable dans Mon Drive.</span></span></label></li>
+  </ul>
+</main>
+</body>
+</html>
