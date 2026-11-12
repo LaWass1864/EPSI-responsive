@@ -1,6 +1,6 @@
 /* Étape 0 : body */
 body {
-  background-color: #a59c8b;
+  background-color: #d8d4cc;
   color: #1f2328;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -53,7 +53,8 @@ header nav {
 
 /* Étape 3 : sélecteurs */
 header a {
-  color: #ffffff;
+  color: #9b7979;
+  text-decoration: none;
 }
 
 .prix + p {
@@ -67,7 +68,7 @@ header a {
 /* Étape 4 : bouton, animations */
 .bouton {
   display: inline-block;
-  background-color: #1f2328;
+  background-color: #8f9eb1;
   transition: transform 0.2s ease;
 }
 
@@ -102,5 +103,5 @@ header a {
 }
 
 .carte.mise-en-avant {
-  transform: rotate(-80deg);
+  transform: rotate(-5deg);
 }
