@@ -65,7 +65,27 @@
     <li><label><input type="checkbox"><span class="step"><strong>Recopier la condition de G3 vers G4, G5 et G6</strong><span class="why">Refusez la suggestion automatique, puis copiez G3 et collez sur G4:G6. Résultats attendus : Élevé, Faible, Élevé. G7 à G10 doivent rester vides.</span></span></label></li>
   </ul>
 
-  <h2>6. Vérifier avant de partir</h2>
+  <h2>6. Exercice 1 : charges mensuelles</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Saisir le tableau en B2:D8</strong><span class="why">Charge (B), Montant mensuel (C), Niveau (D). Six charges : Loyer 1 600, Électricité 240, Eau 60, Assurance 200, Salaires 3 000, Fournitures 300.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Calculer le total en C9</strong><span class="why">Tapez <code>=SOMME(C3:C8)</code>. Résultat attendu : 5 400.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Calculer la moyenne en C10, le max en C11 et le min en C12</strong><span class="why"><code>=MOYENNE(C3:C8)</code> (900), <code>=MAX(C3:C8)</code> (3 000), <code>=MIN(C3:C8)</code> (60).</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Afficher le niveau de chaque charge en D3, puis recopier jusqu'en D8</strong><span class="why"><code>=SI(C3&gt;500;"Élevée";"Normale")</code>. Le loyer et les salaires doivent afficher « Élevée ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Calculer le coût annuel</strong><span class="why">Tapez 12 en F2, puis en E3 <code>=C3*$F$2</code>, recopiée jusqu'en E8. Le $ bloque F2. Résultat attendu pour le loyer : 19 200.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Filtrer les charges « Élevée »</strong><span class="why">Sélectionnez B2:E8, puis Données &gt; Créer un filtre, et choisissez « Élevée » dans la colonne Niveau.</span></span></label></li>
+  </ul>
+
+  <h2>7. Exercice 2 : bon de commande</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Créer une feuille nommée Tarifs</strong><span class="why">Code (A), Produit (B), Prix unitaire (C). P01 Ramette 4 €, P02 Stylo 1 €, P03 Classeur 3 €, P04 Agrafeuse 12 €, P05 Cahier 2 €.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Saisir le bon de commande à partir de B12</strong><span class="why">Code, Quantité, Prix unitaire, Total. Lignes : P01 × 10, P04 × 2, P05 × 5, P02 × 20.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Trouver le prix en D13, puis recopier jusqu'en D15</strong><span class="why"><code>=RECHERCHEV(B13;Tarifs!A:C;3;FAUX)</code> cherche le code dans la feuille Tarifs et renvoie le prix (colonne 3). Résultat attendu pour P01 : 4.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Calculer le total de chaque ligne en E13, puis recopier jusqu'en E15</strong><span class="why"><code>=C13*D13</code>. Résultat attendu pour P01 : 40.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Calculer le total de la commande en E17</strong><span class="why"><code>=SOMME(E13:E15)</code>. Résultat attendu : 94.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Ajouter P03 × 4 et vérifier le total</strong><span class="why">Le total doit passer à 106. Si RECHERCHEV affiche #N/A, le code n'existe pas : vérifiez l'orthographe (P01, avec un zéro).</span></span></label></li>
+  </ul>
+
+  <h2>8. Vérifier avant de partir</h2>
   <ul>
     <li><label><input type="checkbox"><span class="step"><strong>Contrôler les résultats</strong><span class="why">Comparez chaque cellule avec les valeurs indiquées ci-dessus. Une erreur comme #NOM? ou #VALEUR! signifie qu'une formule est mal écrite ou qu'un montant est saisi comme texte.</span></span></label></li>
     <li><label><input type="checkbox"><span class="step"><strong>Vérifier que le fichier est dans Mon Drive</strong><span class="why">Le message « Enregistré dans Drive » apparaît en haut. Le fichier doit être retrouvable dans Mon Drive.</span></span></label></li>
