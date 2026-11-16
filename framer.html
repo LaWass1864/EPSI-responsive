@@ -3,74 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-do Framer – Le Jardin des Sources</title>
+  <title>To-do Framer – One page restaurant (v15)</title>
   <style>
-    :root {
-      --fond: #faf7f2;
-      --texte: #1f2328;
-      --gris: #57606a;
-      --carte: #ffffff;
-      --bordure: #d0d7de;
-      --accent: #1f3a5f;
-      --ok: #1a7f37;
-      --code: #eef1f4;
-    }
+    :root { --fond: #faf7f2; --texte: #1f2328; --gris: #57606a; --carte: #ffffff; --bordure: #d0d7de; --accent: #1f3a5f; --ok: #1a7f37; --code: #eef1f4; }
     @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --fond: #161b22;
-        --texte: #e6edf3;
-        --gris: #9198a1;
-        --carte: #21262d;
-        --bordure: #3d444d;
-        --accent: #7aa7e0;
-        --ok: #56d364;
-        --code: #30363d;
-      }
+      :root:not([data-theme="light"]) { --fond: #161b22; --texte: #e6edf3; --gris: #9198a1; --carte: #21262d; --bordure: #3d444d; --accent: #7aa7e0; --ok: #56d364; --code: #30363d; }
     }
-    :root[data-theme="dark"] {
-      --fond: #161b22;
-      --texte: #e6edf3;
-      --gris: #9198a1;
-      --carte: #21262d;
-      --bordure: #3d444d;
-      --accent: #7aa7e0;
-      --ok: #56d364;
-      --code: #30363d;
-    }
+    :root[data-theme="dark"] { --fond: #161b22; --texte: #e6edf3; --gris: #9198a1; --carte: #21262d; --bordure: #3d444d; --accent: #7aa7e0; --ok: #56d364; --code: #30363d; }
     *, *::before, *::after { box-sizing: border-box; }
-    body {
-      background: var(--fond);
-      color: var(--texte);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.5;
-      margin: 0;
-      padding: 1rem;
-    }
+    body { background: var(--fond); color: var(--texte); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.5; margin: 0; padding: 1rem; }
     main { max-width: 760px; margin: 0 auto; }
     h1 { font-size: 1.5rem; margin: 0 0 0.3rem 0; }
     h2.section { font-size: 1.2rem; margin: 2rem 0 0.5rem 0; }
     .intro { color: var(--gris); margin: 0 0 1rem 0; }
     code { background: var(--code); padding: 0.1rem 0.3rem; border-radius: 4px; overflow-wrap: anywhere; }
-    .progres {
-      position: sticky;
-      top: 0;
-      background: var(--fond);
-      padding: 0.6rem 0;
-      z-index: 1;
-      border-bottom: 1px solid var(--bordure);
-      margin-bottom: 1rem;
-    }
+    .progres { position: sticky; top: 0; background: var(--fond); padding: 0.6rem 0; z-index: 1; border-bottom: 1px solid var(--bordure); margin-bottom: 1rem; }
     .barre { height: 10px; background: var(--carte); border: 1px solid var(--bordure); border-radius: 999px; overflow: hidden; }
     .barre-remplie { height: 100%; width: 0; background: var(--ok); transition: width 0.3s ease; }
     .compteur { font-size: 0.9rem; color: var(--gris); margin: 0.3rem 0 0 0; }
-    .etape {
-      background: var(--carte);
-      border: 1px solid var(--bordure);
-      border-left: 4px solid var(--accent);
-      border-radius: 8px;
-      padding: 0.8rem 1rem;
-      margin: 0.8rem 0;
-    }
+    .etape { background: var(--carte); border: 1px solid var(--bordure); border-left: 4px solid var(--accent); border-radius: 8px; padding: 0.8rem 1rem; margin: 0.8rem 0; }
     .etape h3 { font-size: 1.05rem; margin: 0 0 0.3rem 0; }
     .duree { color: var(--gris); font-size: 0.85rem; margin: 0 0 0.5rem 0; }
     .ou { color: var(--gris); font-size: 0.92rem; margin: 0.4rem 0 0.6rem 0; }
@@ -80,40 +31,29 @@
     input[type="checkbox"] { width: 1.1rem; height: 1.1rem; margin-top: 0.2rem; flex-shrink: 0; accent-color: var(--ok); }
     .fait span { text-decoration: line-through; color: var(--gris); }
     .bonus { border-left-color: var(--ok); }
-    .texte-copie {
-      background: var(--fond);
-      border: 1px dashed var(--bordure);
-      border-radius: 6px;
-      padding: 0.6rem 0.8rem;
-      font-size: 0.93rem;
-      margin: 0.6rem 0;
-    }
+    .suite { border-left-style: dashed; }
+    .regle { background: var(--fond); border: 1px solid var(--bordure); border-radius: 6px; padding: 0.6rem 0.8rem; font-size: 0.93rem; margin: 0.6rem 0; }
+    .regle p { margin: 0.25rem 0; }
+    .texte-copie { background: var(--fond); border: 1px dashed var(--bordure); border-radius: 6px; padding: 0.6rem 0.8rem; font-size: 0.93rem; margin: 0.6rem 0; }
     .texte-copie p { margin: 0.25rem 0; }
-    a { color: var(--accent); }
     .actions { margin: 1.5rem 0; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
-    button {
-      font: inherit;
-      padding: 0.5rem 0.9rem;
-      border-radius: 6px;
-      border: 1px solid var(--bordure);
-      background: var(--carte);
-      color: var(--texte);
-      cursor: pointer;
-    }
-    button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    button { font: inherit; padding: 0.5rem 0.9rem; border-radius: 6px; border: 1px solid var(--bordure); background: var(--carte); color: var(--texte); cursor: pointer; }
+    button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
     .aide { color: var(--gris); font-size: 0.9rem; }
     .rappel { background: var(--carte); border: 1px solid var(--bordure); border-radius: 8px; padding: 0.8rem 1rem; margin-top: 1rem; }
-    @media (max-width: 600px) {
-      body { padding: 0.75rem; }
-      h1 { font-size: 1.3rem; }
-    }
+    @media (max-width: 600px) { body { padding: 0.75rem; } h1 { font-size: 1.3rem; } }
   </style>
 </head>
 <body>
 <main>
 
-  <h1>To-do : introduction à Framer</h1>
-  <p class="intro">Cochez chaque étape au fur et à mesure. Le <strong>socle</strong> est à terminer avant 15h30 ; les <strong>bonus</strong> sont pour ceux qui avancent plus vite.</p>
+  <h1>To-do : one page restaurant (v15)</h1>
+  <p class="intro">On construit la page en blocs, du haut vers le bas. Chaque bloc est une Frame. Cochez au fur et à mesure. Le <strong>socle</strong> est à terminer avant 11h30 ; les <strong>bonus</strong> sont pour ceux qui avancent plus vite.</p>
+
+  <div class="regle">
+    <p><strong>Règle :</strong> un élément rangé par un Stack est en <strong>Position Relative</strong>. En Absolute, il ne suit plus le Stack.</p>
+    <p><strong>Les trois zones :</strong> Layers à gauche, le canevas au centre, Style à droite.</p>
+  </div>
 
   <div class="progres" aria-live="polite">
     <div class="barre" role="progressbar" aria-label="Avancement du socle" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
@@ -127,159 +67,168 @@
   <section class="etape" data-socle>
     <h3>Étape 0 : créer son compte Framer</h3>
     <p class="duree">À faire avant mardi</p>
-    <p class="ou">Où : sur le site de Framer (framer.com), bouton « Sign up » ou « Get started » en haut à droite.</p>
+    <p class="ou">Où : sur framer.com, « Sign up » en haut à droite. Choisissez « Continue with Google ».</p>
     <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s0a"><span>J'ai créé mon compte gratuit, avec mon adresse Google</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s0b"><span>Je suis bien connecté(e) et je vois mes projets</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s0a"><span>Mon compte est créé</span></label></li>
     </ul>
   </section>
 
-  <h2 class="section">Séance du mardi 17/11</h2>
+  <h2 class="section">Partie 1 : découverte de l'interface</h2>
 
   <section class="etape" data-socle>
-    <h3>Étape 1 : créer le projet et découvrir l'interface</h3>
-    <p class="duree">20 min</p>
-    <p class="ou">Où : depuis la page d'accueil de Framer, cliquez sur « New Site » (ou « Nouveau site »), puis choisissez un modèle vide (« Blank »).</p>
+    <h3>Étape 1 : ouvrir un projet</h3>
+    <p class="duree">5 min</p>
+    <p class="ou">Où : « New project » depuis l'accueil de Framer.</p>
     <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s1a"><span>J'ai créé un nouveau site avec un modèle vide</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s1b"><span>Je repère les trois zones : la barre de gauche (calques), la zone centrale (la page), et la barre de droite (propriétés : taille, couleur, texte)</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s1c"><span>J'ai ajouté un texte : cliquez sur le bouton « + » (Insert) en haut à gauche, puis « Text », puis cliquez sur la page</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s1d"><span>J'ai déplacé ce texte à la souris, puis je l'ai supprimé avec la touche Suppr</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s1a"><span>Mon projet est ouvert dans l'éditeur</span></label></li>
     </ul>
   </section>
 
   <section class="etape" data-socle>
-    <h3>Étape 2 : reprendre les bases de mise en page</h3>
-    <p class="duree">20 min</p>
-    <p class="ou">Où : dans la barre de droite, la rubrique « Layout » (ou « Disposition ») permet de choisir si les éléments sont en ligne ou en colonne, et leur espacement.</p>
-    <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s2a"><span>J'ai placé un élément au centre de la page (utiliser la rubrique Layout, ou déplacer l'élément au milieu avec les repères verts)</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s2b"><span>J'ai mis trois éléments côte à côte : sélectionnez-les, puis cliquez sur « Stack » (ou « Pile ») et choisissez « Horizontal »</span></label></li>
-    </ul>
-    <p class="aide">Aide si besoin : <a href="https://flexboxfroggy.com/#fr" target="_blank" rel="noopener">Flexbox Froggy</a> (même logique qu'en CSS).</p>
-  </section>
-
-  <section class="etape" data-socle>
-    <h3>Étape 3 : l'en-tête</h3>
-    <p class="duree">20 min</p>
-    <p class="ou">Où : créez un rectangle (bouton « + » puis « Frame ») en haut de la page, puis placez-y les éléments à l'intérieur.</p>
-    <div class="texte-copie">
-      <p><strong>Textes à copier :</strong></p>
-      <p>Logo : <code>Le Jardin des Sources</code> (à gauche)</p>
-      <p>Menu : <code>Offres</code> · <code>Témoignages</code> · <code>Contact</code> · <code>Réserver</code> (à droite)</p>
-    </div>
-    <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s3a"><span>Le logo est en haut à gauche</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s3b"><span>Les quatre liens du menu sont alignés à droite, sur la même ligne</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s3c"><span>J'ai changé la couleur de fond du rectangle de l'en-tête : cliquez dessus, puis dans la barre de droite, rubrique « Fill » (Remplissage), choisissez une couleur</span></label></li>
-    </ul>
-  </section>
-
-  <section class="etape" data-socle>
-    <h3>Étape 4 : la section d'accueil</h3>
-    <p class="duree">25 min</p>
-    <p class="ou">Où : pour le bouton, cliquez sur « + » puis « Button » (ou créez un rectangle et ajoutez un texte à l'intérieur).</p>
-    <div class="texte-copie">
-      <p><strong>Textes à copier :</strong></p>
-      <p>Titre : <code>Un café, des livres, un jardin</code> (grand, centré)</p>
-      <p>Accroche : <code>Venez lire, travailler ou simplement vous asseoir.</code></p>
-      <p>Bouton : <code>Réserver une table</code></p>
-    </div>
-    <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s4a"><span>Le titre est grand et centré (taille du texte dans la barre de droite, rubrique « Text »)</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s4b"><span>L'accroche est sous le titre</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s4c"><span>Le bouton a une couleur de fond et son texte est lisible</span></label></li>
-    </ul>
-  </section>
-
-  <section class="etape" data-socle>
-    <h3>Étape 5 : les trois offres</h3>
-    <p class="duree">35 min</p>
-    <p class="ou">Où : créez une carte (un rectangle avec des coins arrondis : rubrique « Radius » dans la barre de droite). Pour en avoir trois identiques, copiez-collez la première (Ctrl+C puis Ctrl+V, ou Cmd+C puis Cmd+V sur Mac).</p>
-    <div class="texte-copie">
-      <p><strong>Textes à copier :</strong></p>
-      <p>Titre de section : <code>Nos offres</code></p>
-      <p>Carte 1 : <code>Découverte</code> · <code>6 €</code> · <code>Un café et une pâtisserie au choix.</code></p>
-      <p>Carte 2 : <code>Lecture</code> · <code>29 € / mois</code> · <code>Accès au salon et une boisson par jour.</code></p>
-      <p>Carte 3 : <code>Atelier</code> · <code>15 €</code> · <code>Un atelier d'écriture par mois.</code></p>
-    </div>
-    <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s5a"><span>Trois cartes côte à côte, avec leurs textes</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s5b"><span>Chaque carte a un titre, un prix et une description</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s5c"><span>Les trois cartes ont le même espacement et la même couleur de fond</span></label></li>
-    </ul>
-  </section>
-
-  <section class="etape" data-socle>
-    <h3>Étape 6 : témoignage et contact</h3>
-    <p class="duree">20 min</p>
-    <div class="texte-copie">
-      <p><strong>Textes à copier :</strong></p>
-      <p>Titre : <code>Témoignages</code></p>
-      <p>Témoignage : <code>« Le meilleur endroit du quartier pour travailler le matin. »</code> ; signature : <code>Claire, cliente depuis 2 ans</code></p>
-      <p>Titre : <code>Contact</code> · Texte : <code>Une question, une réservation de groupe ? Écrivez-nous.</code> · Bouton : <code>Nous écrire</code></p>
-    </div>
-    <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s6a"><span>Le témoignage est dans sa propre section, avec un titre</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s6b"><span>La section Contact et son bouton sont en place</span></label></li>
-    </ul>
-  </section>
-
-  <section class="etape" data-socle>
-    <h3>Étape 7 : la version mobile</h3>
-    <p class="duree">15 min</p>
-    <p class="ou">Où : en haut de l'écran, cliquez sur l'icône d'aperçu (« Preview ») puis changez la largeur : choisissez un format téléphone dans la liste, ou réduisez la fenêtre.</p>
-    <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s7a"><span>J'ai regardé l'aperçu en format téléphone</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s7b"><span>Les trois cartes passent l'une sous l'autre, et le texte reste lisible</span></label></li>
-    </ul>
-  </section>
-
-  <section class="etape" data-socle>
-    <h3>Étape 8 : publier et partager</h3>
+    <h3>Étape 2 : la zone Layers (à gauche)</h3>
     <p class="duree">10 min</p>
-    <p class="ou">Où : en haut à droite, cliquez sur « Publish » (Publier). Framer vous donne ensuite une adresse web : copiez-la.</p>
+    <p class="ou">Où : l'onglet <strong>Layers</strong>. C'est la liste des éléments, rangés en hiérarchie. Cliquez sur un élément : il se sélectionne sur le canevas.</p>
     <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="s8a"><span>Le site est publié, et l'adresse s'ouvre dans un nouvel onglet</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="s8b"><span>J'ai copié l'adresse et je l'ai envoyée dans le chat du groupe</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s2a"><span>Je repère l'onglet Layers à gauche</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s2b"><span>Je clique sur un élément dans Layers et je le vois sélectionné sur le canevas</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s2c"><span>Je repère la différence entre une icône de Frame et une icône de Stack</span></label></li>
     </ul>
   </section>
 
-  <h2 class="section">Bonus (pour aller plus loin)</h2>
-
-  <section class="etape bonus">
-    <h3>B1 : la carte « Populaire »</h3>
-    <p class="ou">Où : ajoutez un rectangle arrondi sur le bord supérieur de la carte Lecture, avec le texte « Populaire ».</p>
+  <section class="etape" data-socle>
+    <h3>Étape 3 : la zone centrale (le canevas)</h3>
+    <p class="duree">10 min</p>
+    <p class="ou">Où : la grande zone du milieu. Dans la barre du haut : le <strong>+</strong> (insérer), le carré en pointillés (Frame), le <strong>T</strong> (texte) et le triangle (forme). En haut à droite : <strong>Publish</strong> et le bouton ▷ (aperçu).</p>
     <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="b1a"><span>Le badge « Populaire » est sur la carte Lecture</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="b1b"><span>La carte Lecture est légèrement mise en avant (couleur ou taille différente)</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s3a"><span>Je repère les boutons Frame et T dans la barre du haut</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s3b"><span>J'ai dessiné une Frame sur le canevas avec le carré en pointillés</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s3c"><span>Je repère le bouton ▷ (aperçu) en haut à droite, sans le cliquer pour l'instant</span></label></li>
     </ul>
   </section>
 
-  <section class="etape bonus">
-    <h3>B2 : un bouton qui réagit au survol</h3>
-    <p class="ou">Où : sélectionnez le bouton, puis dans la barre de droite, rubrique « Hover » (Survol), changez la couleur ou la taille.</p>
-    <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="b2a"><span>Le bouton change d'apparence quand la souris passe dessus</span></label></li>
-    </ul>
-  </section>
-
-  <section class="etape bonus">
-    <h3>B3 : une page de réservation</h3>
-    <p class="ou">Où : dans la barre de gauche, cliquez sur « + » en face des pages, puis « Page ». Pour le lien, sélectionnez le bouton « Réserver » et choisissez cette page dans la rubrique « Link » (Lien).</p>
-    <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="b3a"><span>La page « Réserver » contient les champs : Nom, Ville, Nombre de personnes, Date, Message</span></label></li>
-      <li class="case"><label><input type="checkbox" data-id="b3b"><span>Le lien « Réserver » du menu mène à cette page</span></label></li>
-    </ul>
-  </section>
-
-  <section class="etape bonus">
-    <h3>B4 : le pied de page</h3>
-    <div class="texte-copie">
-      <p>Texte : <code>© 2026 Le Jardin des Sources</code></p>
+  <section class="etape" data-socle>
+    <h3>Étape 4 : la zone Style (à droite)</h3>
+    <p class="duree">15 min</p>
+    <p class="ou">Où : à droite, quand un élément est sélectionné. Repérez :</p>
+    <div class="regle">
+      <p><strong>Position</strong> : Type (Absolute, Relative, Fixed, Sticky) et les valeurs L, R, T, B.</p>
+      <p><strong>Size</strong> : Width et Height, avec les menus Fixed, Relative, Fill.</p>
+      <p><strong>Layout</strong> : Type (Stack ou Grid), puis Direction, Gap, Distribute, Align, Padding.</p>
     </div>
     <ul class="cases">
-      <li class="case"><label><input type="checkbox" data-id="b4a"><span>Le pied de page est en bas de la page</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s4a"><span>Je repère la rubrique Position et son Type</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s4b"><span>Je repère la rubrique Size et le menu Width</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s4c"><span>Je repère la rubrique Layout et son Type</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 5 : un Stack avec deux Frames, et un visuel dedans</h3>
+    <p class="duree">15 min</p>
+    <p class="ou">Où : insérez un Stack. Framer crée deux Frames vides dedans : gardez-les ou supprimez-en une (sélection dans Layers, puis Suppr). Ajoutez ensuite un visuel dans une Frame (par exemple un Wave Gradient). Sélectionnez-le, puis dans Style, Position : Type <strong>Relative</strong>. Dans Size, Width : <strong>Fill</strong>.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s5a"><span>J'ai inséré un Stack et je sais pourquoi il contient deux Frames</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s5b"><span>Le visuel est dans une Frame, en Position Relative, et sa largeur est en Fill</span></label></li>
+    </ul>
+  </section>
+
+  <h2 class="section">Partie 2 : la structure de la page</h2>
+
+  <section class="etape" data-socle>
+    <h3>Étape 6 : le Stack vertical de la page</h3>
+    <p class="duree">10 min</p>
+    <p class="ou">Où : la page est un Stack vertical (Layout : Type Stack, Direction <strong>↕</strong>). Ses enfants, de haut en bas : <strong>Header</strong>, <strong>Photos</strong>, <strong>Menu</strong>, <strong>Réservation</strong>, <strong>Footer</strong>. Chaque bloc est une Frame, nommée dans Layers.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s6a"><span>La page est un Stack vertical, avec cinq blocs dedans</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s6b"><span>Chaque bloc est renommé dans Layers (Header, Photos, Menu, Réservation, Footer)</span></label></li>
+    </ul>
+  </section>
+
+  <h2 class="section">Partie 3 : le header</h2>
+
+  <section class="etape" data-socle>
+    <h3>Étape 7 : le menu du haut (logo à gauche, menu à droite)</h3>
+    <p class="duree">25 min</p>
+    <p class="ou">Où : dans le bloc Header, une Frame en Stack horizontal (Direction <strong>↔</strong>, Distribute <strong>Space between</strong>, Align <strong>centre</strong>, Width <strong>Fill</strong>). Dans cette Frame : le logo (texte <code>Le Jardin des Sources</code>, bouton T), puis une Frame de menu en Stack horizontal, <strong>Gap 24</strong>, avec quatre textes : <code>Offres</code>, <code>Carte</code>, <code>Contact</code>, <code>Réserver</code>. Chaque lien est en Position Relative.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s7a"><span>La barre du haut est un Stack horizontal, en Width Fill</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s7b"><span>Le logo est à gauche, le menu à droite</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s7c"><span>Les quatre liens sont alignés sur une même ligne, en Relative</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 8 : le hero photo ou vidéo, dans le header</h3>
+    <p class="duree">20 min</p>
+    <p class="ou">Où : sous la barre du menu, dans le Header, une Frame hero en Stack vertical, Width <strong>Fill</strong>, Height <strong>Fixed</strong> (par exemple 400). Dedans : une photo importée (bouton image) ou un visuel en Relative. Ajoutez un titre (T), par exemple <code>Un café, des livres, un jardin</code>, et un bouton <code>Réserver</code>.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s8a"><span>Le hero est une Frame sous la barre du menu, en Width Fill</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s8b"><span>Il contient une photo ou un visuel, et un titre lisible dessus</span></label></li>
+    </ul>
+  </section>
+
+  <h2 class="section">Partie 4 : le reste de la page</h2>
+
+  <section class="etape" data-socle>
+    <h3>Étape 9 : le bloc Photos du restaurant</h3>
+    <p class="duree">20 min</p>
+    <p class="ou">Où : une Frame, Layout <strong>Grid</strong>, trois colonnes. Dedans, trois ou quatre photos importées, en Position Relative.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s9a"><span>Le bloc Photos est une Frame en Grid, avec au moins trois photos</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 10 : le bloc Menu (la carte)</h3>
+    <p class="duree">20 min</p>
+    <p class="ou">Où : une Frame, Layout <strong>Grid</strong>, trois colonnes, avec trois cartes de plats (Frame + textes). Textes : <code>Croque du jardin 12 €</code>, <code>Salade de saison 11 €</code>, <code>Tarte aux fruits 6 €</code>.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s10a"><span>Le bloc Menu est en Grid, avec trois cartes de plats</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 11 : le formulaire de réservation</h3>
+    <p class="duree">25 min</p>
+    <p class="ou">Où : une Frame en Stack vertical, centrée, Width <strong>Fixed 600</strong>. Dedans : Nom, Email, Nombre de personnes, Date, puis un bouton <code>Réserver</code>.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s11a"><span>Le formulaire est en Stack vertical, centré, en Width Fixed</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 12 : le footer</h3>
+    <p class="duree">10 min</p>
+    <p class="ou">Où : une Frame en Stack horizontal, Distribute <strong>Space between</strong>. À gauche : <code>© Le Jardin des Sources</code>. À droite : <code>Contact</code>.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s12a"><span>Le footer est un Stack horizontal, avec copyright à gauche et contact à droite</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 13 : vérifier dans Layers</h3>
+    <p class="duree">5 min</p>
+    <p class="ou">Où : Layers. Stack (page) → Frame Header → (barre du menu, hero) → Frame Photos → Frame Menu → Frame Réservation → Frame Footer.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s13a"><span>Je peux montrer la hiérarchie des calques à quelqu'un d'autre</span></label></li>
+    </ul>
+  </section>
+
+  <h2 class="section">Pour la suite</h2>
+
+  <section class="etape bonus">
+    <h3>B1 : effet au survol sur le menu</h3>
+    <p class="ou">Où : sélectionnez un lien du menu, puis dans Style, la rubrique Hover (Survol) : changez la couleur.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="b1a"><span>Un lien du menu change de couleur au survol</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape bonus">
+    <h3>B2 : le Wave Gradient en fond du hero</h3>
+    <p class="ou">Où : mettez le Wave Gradient dans la Frame hero, en Position Relative et Width Fill, puis placez le titre par-dessus.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="b2a"><span>Le hero a un fond en Wave Gradient, avec le titre lisible</span></label></li>
     </ul>
   </section>
 
@@ -295,7 +244,7 @@
 </main>
 
 <script>
-  const CLE = "todo-framer-v2";
+  const CLE = "todo-framer-v15";
   const cases = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
   const socle = cases.filter(function (c) { return c.closest("[data-socle]"); });
   const barre = document.getElementById("barre");
@@ -306,21 +255,11 @@
   let resetEnAttente = false;
 
   function lire() {
-    try {
-      return JSON.parse(localStorage.getItem(CLE)) || {};
-    } catch (e) {
-      return {};
-    }
+    try { return JSON.parse(localStorage.getItem(CLE)) || {}; } catch (e) { return {}; }
   }
-
   function ecrire(etat) {
-    try {
-      localStorage.setItem(CLE, JSON.stringify(etat));
-    } catch (e) {
-      // le stockage peut être bloqué : la page fonctionne quand même
-    }
+    try { localStorage.setItem(CLE, JSON.stringify(etat)); } catch (e) { /* stockage bloqué : la page fonctionne quand même */ }
   }
-
   function majAffichage() {
     const faits = socle.filter(function (c) { return c.checked; }).length;
     const total = socle.length;
@@ -343,22 +282,15 @@
     });
   });
 
-  // Réinitialisation en deux clics (sans fenêtre de confirmation)
   boutonReset.addEventListener("click", function () {
     if (!resetEnAttente) {
       resetEnAttente = true;
       messageReset.textContent = "Cliquez encore pour tout décocher.";
-      setTimeout(function () {
-        resetEnAttente = false;
-        messageReset.textContent = "";
-      }, 4000);
+      setTimeout(function () { resetEnAttente = false; messageReset.textContent = ""; }, 4000);
       return;
     }
     resetEnAttente = false;
-    cases.forEach(function (c) {
-      c.checked = false;
-      c.closest("label").classList.remove("fait");
-    });
+    cases.forEach(function (c) { c.checked = false; c.closest("label").classList.remove("fait"); });
     ecrire({});
     messageReset.textContent = "Tout est décoché.";
     majAffichage();
