@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-do Framer – Le Jardin des Sources</title>
+  <style>
+    :root {
+      --fond: #faf7f2;
+      --texte: #1f2328;
+      --gris: #57606a;
+      --carte: #ffffff;
+      --bordure: #d0d7de;
+      --accent: #1f3a5f;
+      --ok: #1a7f37;
+      --code: #eef1f4;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --fond: #161b22;
+        --texte: #e6edf3;
+        --gris: #9198a1;
+        --carte: #21262d;
+        --bordure: #3d444d;
+        --accent: #7aa7e0;
+        --ok: #56d364;
+        --code: #30363d;
+      }
+    }
+    :root[data-theme="dark"] {
+      --fond: #161b22;
+      --texte: #e6edf3;
+      --gris: #9198a1;
+      --carte: #21262d;
+      --bordure: #3d444d;
+      --accent: #7aa7e0;
+      --ok: #56d364;
+      --code: #30363d;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      background: var(--fond);
+      color: var(--texte);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+      margin: 0;
+      padding: 1rem;
+    }
+    main { max-width: 760px; margin: 0 auto; }
+    h1 { font-size: 1.5rem; margin: 0 0 0.3rem 0; }
+    h2.section { font-size: 1.2rem; margin: 2rem 0 0.5rem 0; }
+    .intro { color: var(--gris); margin: 0 0 1rem 0; }
+    code { background: var(--code); padding: 0.1rem 0.3rem; border-radius: 4px; overflow-wrap: anywhere; }
+    .progres {
+      position: sticky;
+      top: 0;
+      background: var(--fond);
+      padding: 0.6rem 0;
+      z-index: 1;
+      border-bottom: 1px solid var(--bordure);
+      margin-bottom: 1rem;
+    }
+    .barre { height: 10px; background: var(--carte); border: 1px solid var(--bordure); border-radius: 999px; overflow: hidden; }
+    .barre-remplie { height: 100%; width: 0; background: var(--ok); transition: width 0.3s ease; }
+    .compteur { font-size: 0.9rem; color: var(--gris); margin: 0.3rem 0 0 0; }
+    .etape {
+      background: var(--carte);
+      border: 1px solid var(--bordure);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      margin: 0.8rem 0;
+    }
+    .etape h3 { font-size: 1.05rem; margin: 0 0 0.3rem 0; }
+    .duree { color: var(--gris); font-size: 0.85rem; margin: 0 0 0.5rem 0; }
+    .ou { color: var(--gris); font-size: 0.92rem; margin: 0.4rem 0 0.6rem 0; }
+    .etape ul.cases { list-style: none; padding: 0; margin: 0; }
+    .etape li.case { margin: 0.35rem 0; }
+    label { display: flex; gap: 0.6rem; align-items: flex-start; cursor: pointer; }
+    input[type="checkbox"] { width: 1.1rem; height: 1.1rem; margin-top: 0.2rem; flex-shrink: 0; accent-color: var(--ok); }
+    .fait span { text-decoration: line-through; color: var(--gris); }
+    .bonus { border-left-color: var(--ok); }
+    .texte-copie {
+      background: var(--fond);
+      border: 1px dashed var(--bordure);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.93rem;
+      margin: 0.6rem 0;
+    }
+    .texte-copie p { margin: 0.25rem 0; }
+    a { color: var(--accent); }
+    .actions { margin: 1.5rem 0; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+    button {
+      font: inherit;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      border: 1px solid var(--bordure);
+      background: var(--carte);
+      color: var(--texte);
+      cursor: pointer;
+    }
+    button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .aide { color: var(--gris); font-size: 0.9rem; }
+    .rappel { background: var(--carte); border: 1px solid var(--bordure); border-radius: 8px; padding: 0.8rem 1rem; margin-top: 1rem; }
+    @media (max-width: 600px) {
+      body { padding: 0.75rem; }
+      h1 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+<main>
+
+  <h1>To-do : introduction à Framer</h1>
+  <p class="intro">Cochez chaque étape au fur et à mesure. Le <strong>socle</strong> est à terminer avant 15h30 ; les <strong>bonus</strong> sont pour ceux qui avancent plus vite.</p>
+
+  <div class="progres" aria-live="polite">
+    <div class="barre" role="progressbar" aria-label="Avancement du socle" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="barre-remplie" id="barre"></div>
+    </div>
+    <p class="compteur" id="compteur">Socle : 0 / 0</p>
+  </div>
+
+  <h2 class="section">Avant la séance</h2>
+
+  <section class="etape" data-socle>
+    <h3>Étape 0 : créer son compte Framer</h3>
+    <p class="duree">À faire avant mardi</p>
+    <p class="ou">Où : sur le site de Framer (framer.com), bouton « Sign up » ou « Get started » en haut à droite.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s0a"><span>J'ai créé mon compte gratuit, avec mon adresse Google</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s0b"><span>Je suis bien connecté(e) et je vois mes projets</span></label></li>
+    </ul>
+  </section>
+
+  <h2 class="section">Séance du mardi 17/11</h2>
+
+  <section class="etape" data-socle>
+    <h3>Étape 1 : créer le projet et découvrir l'interface</h3>
+    <p class="duree">20 min</p>
+    <p class="ou">Où : depuis la page d'accueil de Framer, cliquez sur « New Site » (ou « Nouveau site »), puis choisissez un modèle vide (« Blank »).</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s1a"><span>J'ai créé un nouveau site avec un modèle vide</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s1b"><span>Je repère les trois zones : la barre de gauche (calques), la zone centrale (la page), et la barre de droite (propriétés : taille, couleur, texte)</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s1c"><span>J'ai ajouté un texte : cliquez sur le bouton « + » (Insert) en haut à gauche, puis « Text », puis cliquez sur la page</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s1d"><span>J'ai déplacé ce texte à la souris, puis je l'ai supprimé avec la touche Suppr</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 2 : reprendre les bases de mise en page</h3>
+    <p class="duree">20 min</p>
+    <p class="ou">Où : dans la barre de droite, la rubrique « Layout » (ou « Disposition ») permet de choisir si les éléments sont en ligne ou en colonne, et leur espacement.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s2a"><span>J'ai placé un élément au centre de la page (utiliser la rubrique Layout, ou déplacer l'élément au milieu avec les repères verts)</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s2b"><span>J'ai mis trois éléments côte à côte : sélectionnez-les, puis cliquez sur « Stack » (ou « Pile ») et choisissez « Horizontal »</span></label></li>
+    </ul>
+    <p class="aide">Aide si besoin : <a href="https://flexboxfroggy.com/#fr" target="_blank" rel="noopener">Flexbox Froggy</a> (même logique qu'en CSS).</p>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 3 : l'en-tête</h3>
+    <p class="duree">20 min</p>
+    <p class="ou">Où : créez un rectangle (bouton « + » puis « Frame ») en haut de la page, puis placez-y les éléments à l'intérieur.</p>
+    <div class="texte-copie">
+      <p><strong>Textes à copier :</strong></p>
+      <p>Logo : <code>Le Jardin des Sources</code> (à gauche)</p>
+      <p>Menu : <code>Offres</code> · <code>Témoignages</code> · <code>Contact</code> · <code>Réserver</code> (à droite)</p>
+    </div>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s3a"><span>Le logo est en haut à gauche</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s3b"><span>Les quatre liens du menu sont alignés à droite, sur la même ligne</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s3c"><span>J'ai changé la couleur de fond du rectangle de l'en-tête : cliquez dessus, puis dans la barre de droite, rubrique « Fill » (Remplissage), choisissez une couleur</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 4 : la section d'accueil</h3>
+    <p class="duree">25 min</p>
+    <p class="ou">Où : pour le bouton, cliquez sur « + » puis « Button » (ou créez un rectangle et ajoutez un texte à l'intérieur).</p>
+    <div class="texte-copie">
+      <p><strong>Textes à copier :</strong></p>
+      <p>Titre : <code>Un café, des livres, un jardin</code> (grand, centré)</p>
+      <p>Accroche : <code>Venez lire, travailler ou simplement vous asseoir.</code></p>
+      <p>Bouton : <code>Réserver une table</code></p>
+    </div>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s4a"><span>Le titre est grand et centré (taille du texte dans la barre de droite, rubrique « Text »)</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s4b"><span>L'accroche est sous le titre</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s4c"><span>Le bouton a une couleur de fond et son texte est lisible</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 5 : les trois offres</h3>
+    <p class="duree">35 min</p>
+    <p class="ou">Où : créez une carte (un rectangle avec des coins arrondis : rubrique « Radius » dans la barre de droite). Pour en avoir trois identiques, copiez-collez la première (Ctrl+C puis Ctrl+V, ou Cmd+C puis Cmd+V sur Mac).</p>
+    <div class="texte-copie">
+      <p><strong>Textes à copier :</strong></p>
+      <p>Titre de section : <code>Nos offres</code></p>
+      <p>Carte 1 : <code>Découverte</code> · <code>6 €</code> · <code>Un café et une pâtisserie au choix.</code></p>
+      <p>Carte 2 : <code>Lecture</code> · <code>29 € / mois</code> · <code>Accès au salon et une boisson par jour.</code></p>
+      <p>Carte 3 : <code>Atelier</code> · <code>15 €</code> · <code>Un atelier d'écriture par mois.</code></p>
+    </div>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s5a"><span>Trois cartes côte à côte, avec leurs textes</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s5b"><span>Chaque carte a un titre, un prix et une description</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s5c"><span>Les trois cartes ont le même espacement et la même couleur de fond</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 6 : témoignage et contact</h3>
+    <p class="duree">20 min</p>
+    <div class="texte-copie">
+      <p><strong>Textes à copier :</strong></p>
+      <p>Titre : <code>Témoignages</code></p>
+      <p>Témoignage : <code>« Le meilleur endroit du quartier pour travailler le matin. »</code> ; signature : <code>Claire, cliente depuis 2 ans</code></p>
+      <p>Titre : <code>Contact</code> · Texte : <code>Une question, une réservation de groupe ? Écrivez-nous.</code> · Bouton : <code>Nous écrire</code></p>
+    </div>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s6a"><span>Le témoignage est dans sa propre section, avec un titre</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s6b"><span>La section Contact et son bouton sont en place</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 7 : la version mobile</h3>
+    <p class="duree">15 min</p>
+    <p class="ou">Où : en haut de l'écran, cliquez sur l'icône d'aperçu (« Preview ») puis changez la largeur : choisissez un format téléphone dans la liste, ou réduisez la fenêtre.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s7a"><span>J'ai regardé l'aperçu en format téléphone</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s7b"><span>Les trois cartes passent l'une sous l'autre, et le texte reste lisible</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 8 : publier et partager</h3>
+    <p class="duree">10 min</p>
+    <p class="ou">Où : en haut à droite, cliquez sur « Publish » (Publier). Framer vous donne ensuite une adresse web : copiez-la.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s8a"><span>Le site est publié, et l'adresse s'ouvre dans un nouvel onglet</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="s8b"><span>J'ai copié l'adresse et je l'ai envoyée dans le chat du groupe</span></label></li>
+    </ul>
+  </section>
+
+  <h2 class="section">Bonus (pour aller plus loin)</h2>
+
+  <section class="etape bonus">
+    <h3>B1 : la carte « Populaire »</h3>
+    <p class="ou">Où : ajoutez un rectangle arrondi sur le bord supérieur de la carte Lecture, avec le texte « Populaire ».</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="b1a"><span>Le badge « Populaire » est sur la carte Lecture</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="b1b"><span>La carte Lecture est légèrement mise en avant (couleur ou taille différente)</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape bonus">
+    <h3>B2 : un bouton qui réagit au survol</h3>
+    <p class="ou">Où : sélectionnez le bouton, puis dans la barre de droite, rubrique « Hover » (Survol), changez la couleur ou la taille.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="b2a"><span>Le bouton change d'apparence quand la souris passe dessus</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape bonus">
+    <h3>B3 : une page de réservation</h3>
+    <p class="ou">Où : dans la barre de gauche, cliquez sur « + » en face des pages, puis « Page ». Pour le lien, sélectionnez le bouton « Réserver » et choisissez cette page dans la rubrique « Link » (Lien).</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="b3a"><span>La page « Réserver » contient les champs : Nom, Ville, Nombre de personnes, Date, Message</span></label></li>
+      <li class="case"><label><input type="checkbox" data-id="b3b"><span>Le lien « Réserver » du menu mène à cette page</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape bonus">
+    <h3>B4 : le pied de page</h3>
+    <div class="texte-copie">
+      <p>Texte : <code>© 2026 Le Jardin des Sources</code></p>
+    </div>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="b4a"><span>Le pied de page est en bas de la page</span></label></li>
+    </ul>
+  </section>
+
+  <div class="actions">
+    <button type="button" id="reset">Tout décocher</button>
+    <span class="aide" id="message-reset"></span>
+  </div>
+
+  <div class="rappel">
+    <strong>Rappel :</strong> si une étape bloque, dites-le à voix haute avant de passer à la suivante. Une étape bloquée à 11h20 doit être signalée tout de suite.
+  </div>
+
+</main>
+
+<script>
+  const CLE = "todo-framer-v2";
+  const cases = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
+  const socle = cases.filter(function (c) { return c.closest("[data-socle]"); });
+  const barre = document.getElementById("barre");
+  const compteur = document.getElementById("compteur");
+  const progres = document.querySelector(".barre");
+  const messageReset = document.getElementById("message-reset");
+  const boutonReset = document.getElementById("reset");
+  let resetEnAttente = false;
+
+  function lire() {
+    try {
+      return JSON.parse(localStorage.getItem(CLE)) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function ecrire(etat) {
+    try {
+      localStorage.setItem(CLE, JSON.stringify(etat));
+    } catch (e) {
+      // le stockage peut être bloqué : la page fonctionne quand même
+    }
+  }
+
+  function majAffichage() {
+    const faits = socle.filter(function (c) { return c.checked; }).length;
+    const total = socle.length;
+    const pourcent = total ? Math.round((faits / total) * 100) : 0;
+    barre.style.width = pourcent + "%";
+    progres.setAttribute("aria-valuenow", pourcent);
+    compteur.textContent = "Socle : " + faits + " / " + total;
+  }
+
+  const etat = lire();
+  cases.forEach(function (c) {
+    c.checked = !!etat[c.dataset.id];
+    c.closest("label").classList.toggle("fait", c.checked);
+    c.addEventListener("change", function () {
+      const nouvel = lire();
+      nouvel[c.dataset.id] = c.checked;
+      ecrire(nouvel);
+      c.closest("label").classList.toggle("fait", c.checked);
+      majAffichage();
+    });
+  });
+
+  // Réinitialisation en deux clics (sans fenêtre de confirmation)
+  boutonReset.addEventListener("click", function () {
+    if (!resetEnAttente) {
+      resetEnAttente = true;
+      messageReset.textContent = "Cliquez encore pour tout décocher.";
+      setTimeout(function () {
+        resetEnAttente = false;
+        messageReset.textContent = "";
+      }, 4000);
+      return;
+    }
+    resetEnAttente = false;
+    cases.forEach(function (c) {
+      c.checked = false;
+      c.closest("label").classList.remove("fait");
+    });
+    ecrire({});
+    messageReset.textContent = "Tout est décoché.";
+    majAffichage();
+  });
+
+  majAffichage();
+</script>
+</body>
+</html>
