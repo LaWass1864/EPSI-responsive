@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-do Framer – One page restaurant (v15)</title>
+  <title>To-do Framer – One page restaurant (v16)</title>
   <style>
     :root { --fond: #faf7f2; --texte: #1f2328; --gris: #57606a; --carte: #ffffff; --bordure: #d0d7de; --accent: #1f3a5f; --ok: #1a7f37; --code: #eef1f4; }
     @media (prefers-color-scheme: dark) {
@@ -47,7 +47,7 @@
 <body>
 <main>
 
-  <h1>To-do : one page restaurant (v15)</h1>
+  <h1>To-do : one page restaurant (v16)</h1>
   <p class="intro">On construit la page en blocs, du haut vers le bas. Chaque bloc est une Frame. Cochez au fur et à mesure. Le <strong>socle</strong> est à terminer avant 11h30 ; les <strong>bonus</strong> sont pour ceux qui avancent plus vite.</p>
 
   <div class="regle">
@@ -214,6 +214,24 @@
     </ul>
   </section>
 
+  <section class="etape" data-socle>
+    <h3>Étape 14 : m'inviter sur votre projet</h3>
+    <p class="duree">2 min</p>
+    <p class="ou">Où : en haut à droite, bouton <strong>Invite</strong>. Saisissez l'adresse e-mail que je vous donne dans le groupe, avec un accès en lecture seule si l'option est proposée, puis envoyez l'invitation.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s14a"><span>J'ai invité le formateur sur mon projet Framer</span></label></li>
+    </ul>
+  </section>
+
+  <section class="etape" data-socle>
+    <h3>Étape 15 : déposer le lien de votre site</h3>
+    <p class="duree">5 min</p>
+    <p class="ou">Où : cliquez sur <strong>Publish</strong> en haut à droite, puis copiez le lien publié de votre site. Collez-le dans le formulaire Google que je vous envoie dans le groupe, avant 9h le mardi 24/11.</p>
+    <ul class="cases">
+      <li class="case"><label><input type="checkbox" data-id="s15a"><span>J'ai déposé le lien publié de mon site dans le formulaire</span></label></li>
+    </ul>
+  </section>
+
   <h2 class="section">Pour la suite</h2>
 
   <section class="etape bonus">
@@ -244,7 +262,7 @@
 </main>
 
 <script>
-  const CLE = "todo-framer-v15";
+  const CLE = "todo-framer-v16";
   const cases = Array.from(document.querySelectorAll('input[type="checkbox"][data-id]'));
   const socle = cases.filter(function (c) { return c.closest("[data-socle]"); });
   const barre = document.getElementById("barre");
