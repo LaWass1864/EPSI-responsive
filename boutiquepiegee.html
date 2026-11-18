@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Boutique Piégée</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:#F7F4EE;color:#1C2035}
+  /* ---------- Barre formatrice (toujours accessible) ---------- */
+  .toolbar{position:sticky;top:0;z-index:50;background:#1C2035;color:#F7F4EE;display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:12px 20px}
+  .toolbar strong{font-size:17px;margin-right:auto}
+  .toolbar .note{font-size:14px;color:#C9CCD8;width:100%}
+  .tb{font:inherit;font-size:16px;font-weight:600;border:2px solid #F2B13A;background:transparent;color:#F7F4EE;padding:8px 16px;border-radius:8px;cursor:pointer}
+  .tb[aria-pressed="true"]{background:#F2B13A;color:#1C2035}
+  .tb:focus-visible{outline:3px solid #fff;outline-offset:3px}
+  .live{position:absolute;left:-9999px}
+  /* ---------- Repères numérotés ---------- */
+  .hint{display:none;align-items:center;justify-content:center;gap:6px;background:#A3271F;color:#fff;font-size:13px;font-weight:700;border-radius:14px;padding:3px 10px;margin:4px;vertical-align:middle;line-height:1.2}
+  .good .hint{background:#1E6B3A}
+  body.hints .hint{display:inline-flex}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 60px}
+
+  /* =============== VERSION PIÉGÉE =============== */
+  .bad{font-family:"Brush Script MT","Comic Sans MS",cursive;color:#9A9A9A;background:#FFFFFF;position:relative}
+  .bad *:focus{outline:none}
+  .bad .logo{font-size:30px;letter-spacing:6px;color:#D6D6D6;text-transform:uppercase}
+  .bad .top{display:flex;align-items:center;gap:24px;padding:16px 20px;border-bottom:1px solid #EEE;flex-wrap:wrap}
+  .bad .menu{position:relative;font-size:18px;cursor:default}
+  .bad .menu .sub{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #EEE;padding:8px 16px;min-width:180px;z-index:5}
+  .bad .menu .sub a{display:block;color:#B5B5B5;padding:4px 0;text-decoration:none}
+  .bad .menu.open .sub{display:block}
+  .bad .timer{margin-left:auto;font-size:15px;color:#E57373}
+  .bad .t1{font-size:28px;font-weight:bold;margin:24px 20px 4px}
+  .bad .t2{font-size:28px;font-weight:bold;margin:28px 20px 8px}
+  .bad .intro{margin:0 20px;font-size:15px;text-align:justify}
+  .bad .intro a{color:#B5B5B5}
+  .bad .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin:16px 20px}
+  .bad .p{border:1px solid #F0F0F0;padding:16px}
+  .bad .p img{width:100%;height:150px;object-fit:contain;background:#FAFAFA}
+  .bad .name{font-size:28px;font-weight:bold;color:#B5B5B5}
+  .bad .price{font-size:14px;color:#C8C8C8}
+  .bad .sizes span{display:inline-block;border:1px solid #DDD;padding:2px 10px;margin:6px 4px 6px 0;font-size:14px}
+  .bad .sizes .out{color:#E53935;border-color:#E53935}
+  .bad .btn{display:inline-block;width:100px;height:34px;line-height:34px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;background:#EEEEEE;color:#B5B5B5;font-size:15px;text-align:center;cursor:pointer;border-radius:4px}
+  .bad .msg{font-size:14px;color:#81C784;min-height:20px}
+  .bad .news{margin:8px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .bad .news input{border:1px solid #EEE;padding:8px;width:220px;font-family:inherit;color:#9A9A9A}
+  .bad .news .go{background:#EEEEEE;color:#B5B5B5;padding:8px 14px;cursor:pointer}
+  .bad .err{color:#E53935;font-size:14px}
+  .bad .video{margin:8px 20px;background:#E9E9E9;height:170px;max-width:420px;display:flex;align-items:center;justify-content:center;font-size:40px;color:#C8C8C8;cursor:pointer;position:relative}
+  .bad .video small{position:absolute;bottom:8px;left:12px;font-size:13px;color:#BDBDBD}
+  .bad .cookie{position:sticky;bottom:0;background:#FAFAFA;border-top:1px solid #EEE;padding:14px 20px;font-size:14px;display:flex;gap:16px;align-items:center}
+  .bad .cookie .x{margin-left:auto;color:#D0D0D0;font-size:12px;cursor:pointer}
+
+  /* =============== VERSION CORRIGÉE =============== */
+  .good{background:#FFFDF8;color:#1C2035;font-size:18px;line-height:1.5}
+  .good a{color:#0B6466;font-weight:600}
+  .good :focus-visible{outline:3px solid #0B6466;outline-offset:3px}
+  .good header{display:flex;align-items:center;gap:24px;padding:16px 20px;border-bottom:2px solid #ECE5D8;flex-wrap:wrap}
+  .good .logo{font-size:24px;font-weight:800;color:#1C2035;text-decoration:none}
+  .good nav{position:relative}
+  .good .mbtn{font:inherit;font-weight:600;background:#fff;color:#1C2035;border:2px solid #1C2035;border-radius:8px;padding:8px 14px;cursor:pointer;min-height:44px}
+  .good .sub{position:absolute;top:110%;left:0;background:#fff;border:2px solid #1C2035;border-radius:8px;padding:8px 16px;min-width:200px;list-style:none;margin:0;z-index:5}
+  .good .sub a{display:block;padding:6px 0}
+  .good h1{font-size:32px;margin:24px 20px 4px}
+  .good h2{font-size:24px;margin:32px 20px 8px}
+  .good h3{font-size:20px;margin:8px 0 4px}
+  .good .intro{margin:0 20px;max-width:65ch}
+  .good .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin:16px 20px}
+  .good .p{border:2px solid #ECE5D8;border-radius:12px;padding:16px;background:#fff}
+  .good .p img{width:100%;height:150px;object-fit:contain;background:#F7F4EE;border-radius:8px}
+  .good .price{font-weight:700;font-size:20px;margin:0}
+  .good fieldset{border:none;padding:0;margin:8px 0}
+  .good legend{font-weight:600;font-size:16px}
+  .good .sizes button{font:inherit;font-weight:600;min-width:44px;min-height:44px;margin:4px 6px 4px 0;border:2px solid #1C2035;background:#fff;color:#1C2035;border-radius:8px;cursor:pointer}
+  .good .sizes button[aria-pressed="true"]{background:#1C2035;color:#fff}
+  .good .sizes button:disabled{border-style:dashed;color:#595959;text-decoration:line-through;cursor:not-allowed}
+  .good .stock{font-size:16px;color:#595959;margin:0}
+  .good .btn{font:inherit;font-weight:700;background:#1C2035;color:#F7F4EE;border:none;border-radius:8px;padding:12px 18px;cursor:pointer;min-height:44px;margin-top:8px}
+  .good .msg{font-size:16px;color:#1E6B3A;font-weight:600;min-height:24px;margin:6px 0 0}
+  .good form{margin:8px 20px;max-width:420px}
+  .good label{display:block;font-weight:600}
+  .good input{font:inherit;width:100%;padding:10px;border:2px solid #767676;border-radius:8px;margin:4px 0}
+  .good input[aria-invalid="true"]{border-color:#A3271F}
+  .good .help{font-size:16px;color:#4A4F63;margin:0}
+  .good .err{color:#A3271F;font-weight:700;font-size:16px;margin:4px 0}
+  .good .video{margin:8px 20px;max-width:420px}
+  .good .screen{background:#1C2035;color:#F7F4EE;height:170px;border-radius:12px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:12px;text-align:center}
+  .good .cap{background:rgba(0,0,0,.75);padding:4px 10px;border-radius:6px;font-size:16px}
+  .good .vctl{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+  .good .vctl button{font:inherit;font-weight:600;border:2px solid #1C2035;background:#fff;color:#1C2035;border-radius:8px;padding:6px 12px;min-height:44px;cursor:pointer}
+  .good .vctl button[aria-pressed="true"]{background:#1C2035;color:#fff}
+  .good details{margin-top:8px}
+  .good .cookie{position:sticky;bottom:0;background:#1C2035;color:#F7F4EE;padding:14px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .good .cookie button{font:inherit;font-weight:700;border-radius:8px;padding:8px 16px;min-height:44px;cursor:pointer;border:2px solid #F2B13A}
+  .good .cookie .yes{background:#F2B13A;color:#1C2035}
+  .good .cookie .no{background:transparent;color:#F7F4EE}
+</style>
+</head>
+<body>
+
+<div class="toolbar" role="region" aria-label="Commandes de la démonstration">
+  <strong>La Boutique Piégée · démonstration pédagogique</strong>
+  <button class="tb" id="vBad" aria-pressed="true">Version piégée</button>
+  <button class="tb" id="vGood" aria-pressed="false">Version corrigée</button>
+  <button class="tb" id="vHints" aria-pressed="false">Afficher les pièges</button>
+  <p class="note">Site fictif créé pour une formation à l'accessibilité. La version piégée contient volontairement 10 erreurs : à vous de les trouver !</p>
+</div>
+<div class="live" aria-live="polite" id="announce"></div>
+
+<!-- ======================= VERSION PIÉGÉE ======================= -->
+<div class="bad" id="bad">
+  <div class="top">
+    <div class="logo">Boutique Piégée</div>
+    <div class="menu" id="badMenu">Catégories ▾ <span class="hint">3 · Menu au survol seulement</span>
+      <div class="sub"><a href="#bad">Bijoux</a><a href="#bad">Vêtements</a><a href="#bad">Soins</a></div>
+    </div>
+    <div class="timer" id="badTimer">⏳ Votre panier expire dans 0:45 !</div>
+  </div>
+
+  <div class="t1">Nouveautés de la saison <span class="hint">5 · Titres en simple texte gras</span></div>
+  <p class="intro">Découvrez nos créations. Nouvelle collection : <a href="#bad">cliquez ici</a> <span class="hint">6 · Lien « cliquez ici »</span>. Pour tout savoir sur nos engagements, nos matières, nos fournisseurs et notre politique de retour sous trente jours ouvrés hors jours fériés, <a href="#bad">en savoir plus</a>.</p>
+
+  <div class="grid">
+    <div class="p">
+      <img alt="IMG_2034.jpg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'><circle cx='100' cy='70' r='34' fill='none' stroke='%23C9A227' stroke-width='10'/><circle cx='100' cy='32' r='12' fill='%232E7D32'/></svg>">
+      <span class="hint">2 · alt="IMG_2034.jpg"</span>
+      <div class="name">Bague Céleste</div>
+      <div class="price">49 € <span class="hint">1 · Contraste trop faible</span></div>
+      <div class="sizes"><span>52</span><span class="out">54</span><span>56</span> <span class="hint">8 · Épuisé = rouge seulement</span></div>
+      <div class="btn" onclick="badAdd(this)">Ajouter au panier</div>
+      <span class="hint">4 · Aucun focus visible</span><span class="hint">9 · Largeur fixe, texte coupé</span>
+      <div class="msg"></div>
+    </div>
+    <div class="p">
+      <img alt="image" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'><path d='M60 30 L85 20 Q100 32 115 20 L140 30 L155 60 L135 66 L135 108 L65 108 L65 66 L45 60 Z' fill='%23B39DDB'/></svg>">
+      <div class="name">Sweat Rétro</div>
+      <div class="price">39 €</div>
+      <div class="sizes"><span class="out">S</span><span>M</span><span>L</span></div>
+      <div class="btn" onclick="badAdd(this)">Ajouter au panier</div>
+      <div class="msg"></div>
+    </div>
+    <div class="p">
+      <img alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'><rect x='82' y='34' width='36' height='74' rx='8' fill='%2380CBC4'/><rect x='90' y='16' width='20' height='20' rx='4' fill='%23455A64'/></svg>">
+      <div class="name">Sérum Boucles</div>
+      <div class="price">19 €</div>
+      <div class="sizes"><span>50 ml</span><span class="out">100 ml</span></div>
+      <div class="btn" onclick="badAdd(this)">Ajouter au panier</div>
+      <div class="msg"></div>
+    </div>
+  </div>
+
+  <div class="t2">Newsletter</div>
+  <div class="news">
+    <input id="badMail" placeholder="E-mail"> <span class="hint">7 · Pas d'étiquette, erreur vague</span>
+    <span class="go" onclick="badSubmit()">OK</span>
+    <span class="err" id="badErr"></span>
+  </div>
+
+  <div class="t2">Notre tuto</div>
+  <div class="video" onclick="this.querySelector('small').textContent='▶ Lecture en cours… (aucun sous-titre disponible)'">▶<small>Comment choisir sa taille</small></div>
+  <span class="hint" style="margin-left:20px">10 · Vidéo sans sous-titres</span>
+
+  <div class="cookie" id="badCookie">Nous utilisons des cookies pour améliorer votre expérience, mesurer l'audience et personnaliser les publicités. En continuant, vous acceptez. <span class="hint">Bonus · Impossible à fermer au clavier</span><span class="x" onclick="this.parentNode.remove()">fermer</span></div>
+</div>
+
+<!-- ======================= VERSION CORRIGÉE ======================= -->
+<div class="good" id="good" hidden>
+  <header>
+    <a class="logo" href="#good">Boutique Corrigée</a>
+    <nav aria-label="Navigation principale">
+      <button class="mbtn" id="goodMenuBtn" aria-expanded="false" aria-controls="goodSub">Catégories</button>
+      <span class="hint">3 · Menu au clic et au clavier</span>
+      <ul class="sub" id="goodSub" hidden>
+        <li><a href="#good">Bijoux</a></li><li><a href="#good">Vêtements</a></li><li><a href="#good">Soins</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Nouveautés de la saison <span class="hint">5 · Vrais titres H1, H2, H3</span></h1>
+    <p class="intro">Découvrez nos créations. <a href="#good">Voir la nouvelle collection</a> <span class="hint">6 · Lien explicite</span>. Retours gratuits sous 30 jours : <a href="#good">lire notre politique de retour</a>.</p>
+
+    <h2>Nos produits</h2>
+    <div class="grid">
+      <article class="p">
+        <img alt="Bague dorée sertie d'une pierre verte ronde" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'><circle cx='100' cy='70' r='34' fill='none' stroke='%23C9A227' stroke-width='10'/><circle cx='100' cy='32' r='12' fill='%232E7D32'/></svg>">
+        <span class="hint">2 · Texte alternatif utile</span>
+        <h3>Bague Céleste</h3>
+        <p class="price">49 € <span class="hint">1 · Contraste suffisant</span></p>
+        <fieldset class="sizes"><legend>Taille</legend>
+          <button aria-pressed="false" onclick="pick(this)">52</button><button disabled>54</button><button aria-pressed="false" onclick="pick(this)">56</button>
+        </fieldset>
+        <p class="stock">Taille 54 : épuisée <span class="hint">8 · Information écrite</span></p>
+        <button class="btn" onclick="goodAdd(this,'Bague Céleste')">Ajouter au panier</button>
+        <span class="hint">4 · Focus visible</span><span class="hint">9 · Le bouton s'adapte au texte</span>
+        <p class="msg"></p>
+      </article>
+      <article class="p">
+        <img alt="Sweat-shirt mauve à col rond" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'><path d='M60 30 L85 20 Q100 32 115 20 L140 30 L155 60 L135 66 L135 108 L65 108 L65 66 L45 60 Z' fill='%23B39DDB'/></svg>">
+        <h3>Sweat Rétro</h3>
+        <p class="price">39 €</p>
+        <fieldset class="sizes"><legend>Taille</legend>
+          <button disabled>S</button><button aria-pressed="false" onclick="pick(this)">M</button><button aria-pressed="false" onclick="pick(this)">L</button>
+        </fieldset>
+        <p class="stock">Taille S : épuisée</p>
+        <button class="btn" onclick="goodAdd(this,'Sweat Rétro')">Ajouter au panier</button>
+        <p class="msg"></p>
+      </article>
+      <article class="p">
+        <img alt="Flacon de sérum pour cheveux bouclés, bouchon gris" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'><rect x='82' y='34' width='36' height='74' rx='8' fill='%2380CBC4'/><rect x='90' y='16' width='20' height='20' rx='4' fill='%23455A64'/></svg>">
+        <h3>Sérum Boucles</h3>
+        <p class="price">19 €</p>
+        <fieldset class="sizes"><legend>Contenance</legend>
+          <button aria-pressed="false" onclick="pick(this)">50 ml</button><button disabled>100 ml</button>
+        </fieldset>
+        <p class="stock">100 ml : épuisé</p>
+        <button class="btn" onclick="goodAdd(this,'Sérum Boucles')">Ajouter au panier</button>
+        <p class="msg"></p>
+      </article>
+    </div>
+
+    <h2>Newsletter</h2>
+    <form id="goodForm" novalidate>
+      <label for="goodMail">Adresse e-mail (obligatoire)</label>
+      <p class="help" id="mailHelp">Exemple : nom@exemple.fr</p>
+      <input id="goodMail" type="email" autocomplete="email" aria-describedby="mailHelp mailErr">
+      <p class="err" id="mailErr"></p>
+      <button class="btn" type="submit">S'inscrire à la newsletter</button>
+      <span class="hint">7 · Étiquette visible, erreur précise</span>
+    </form>
+
+    <h2>Notre tuto : comment choisir sa taille</h2>
+    <div class="video">
+      <div class="screen" aria-label="Lecteur vidéo de démonstration">
+        <span class="cap" id="cap">« Mesurez votre tour de doigt avec un fil, puis reportez la mesure sur une règle. »</span>
+      </div>
+      <div class="vctl">
+        <button aria-pressed="false" id="play">▶ Lire</button>
+        <button aria-pressed="true" id="cc">Sous-titres activés</button>
+      </div>
+      <span class="hint">10 · Sous-titres et transcription</span>
+      <details><summary>Lire la transcription</summary><p>Mesurez votre tour de doigt avec un fil, puis reportez la mesure sur une règle. Le guide des tailles vous donne ensuite la taille correspondante.</p></details>
+    </div>
+  </main>
+
+  <div class="cookie" id="goodCookie" role="region" aria-label="Cookies">
+    <span>Nous utilisons des cookies pour mesurer l'audience. Vous pouvez accepter ou refuser.</span>
+    <button class="yes" onclick="closeCookie()">Accepter</button>
+    <button class="no" onclick="closeCookie()">Refuser</button>
+    <span class="hint">Bonus · Boutons utilisables au clavier</span>
+  </div>
+</div>
+
+<script>
+  const $ = s => document.querySelector(s);
+  const say = t => { const a = $('#announce'); a.textContent = ''; setTimeout(() => a.textContent = t, 50); };
+
+  // ----- Barre formatrice -----
+  function show(which){
+    const isBad = which === 'bad';
+    $('#bad').hidden = !isBad; $('#good').hidden = isBad;
+    $('#vBad').setAttribute('aria-pressed', isBad); $('#vGood').setAttribute('aria-pressed', !isBad);
+    say(isBad ? 'Version piégée affichée' : 'Version corrigée affichée');
+    if (isBad) startTimer(); else stopTimer();
+  }
+  $('#vBad').onclick = () => show('bad');
+  $('#vGood').onclick = () => show('good');
+  $('#vHints').onclick = e => {
+    const on = document.body.classList.toggle('hints');
+    e.currentTarget.setAttribute('aria-pressed', on);
+    e.currentTarget.textContent = on ? 'Masquer les pièges' : 'Afficher les pièges';
+  };
+
+  // ----- Version piégée -----
+  const bm = $('#badMenu');
+  bm.addEventListener('mouseenter', () => bm.classList.add('open'));
+  bm.addEventListener('mouseleave', () => bm.classList.remove('open'));
+  function badAdd(el){ el.parentNode.querySelector('.msg').textContent = 'ok'; }
+  function badSubmit(){ $('#badErr').textContent = 'Erreur'; }
+  let t = null, left = 45;
+  function startTimer(){
+    stopTimer(); left = 45;
+    t = setInterval(() => {
+      left--;
+      const el = $('#badTimer');
+      if (left <= 0){ el.textContent = '⏳ Trop tard ! Votre panier a été vidé.'; stopTimer(); return; }
+      el.textContent = '⏳ Votre panier expire dans 0:' + String(left).padStart(2,'0') + ' !';
+    }, 1000);
+  }
+  function stopTimer(){ if (t) clearInterval(t); t = null; }
+  startTimer();
+
+  // ----- Version corrigée -----
+  const mb = $('#goodMenuBtn'), sub = $('#goodSub');
+  function setMenu(open){ mb.setAttribute('aria-expanded', open); sub.hidden = !open; }
+  mb.onclick = () => setMenu(sub.hidden);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sub.hidden){ setMenu(false); mb.focus(); } });
+  function pick(b){
+    b.parentNode.querySelectorAll('button[aria-pressed]').forEach(x => x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+  }
+  function goodAdd(btn, name){
+    const msg = btn.parentNode.querySelector('.msg');
+    msg.textContent = '✓ ' + name + ' a été ajouté à votre panier.';
+    say(name + ' a été ajouté à votre panier.');
+  }
+  $('#goodForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const i = $('#goodMail'), err = $('#mailErr');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(i.value)){
+      i.setAttribute('aria-invalid','true');
+      err.textContent = i.value ? 'Adresse incomplète. Format attendu : nom@exemple.fr' : 'Veuillez saisir votre adresse e-mail. Format attendu : nom@exemple.fr';
+      i.focus();
+    } else {
+      i.removeAttribute('aria-invalid'); err.textContent = '';
+      say('Merci, votre inscription est enregistrée.');
+      err.textContent = '';
+      $('#goodForm').querySelector('.help').textContent = '✓ Merci, votre inscription est enregistrée.';
+    }
+  });
+  $('#cc').onclick = e => {
+    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+    e.currentTarget.setAttribute('aria-pressed', on);
+    e.currentTarget.textContent = on ? 'Sous-titres activés' : 'Sous-titres désactivés';
+    $('#cap').style.visibility = on ? 'visible' : 'hidden';
+  };
+  $('#play').onclick = e => {
+    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+    e.currentTarget.setAttribute('aria-pressed', on);
+    e.currentTarget.textContent = on ? '❚❚ Pause' : '▶ Lire';
+  };
+  function closeCookie(){ $('#goodCookie').remove(); say('Préférences de cookies enregistrées.'); }
+</script>
+</body>
+</html>
