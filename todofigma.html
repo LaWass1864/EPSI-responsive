@@ -69,6 +69,8 @@
     padding: 12px 16px; border-radius: 6px; margin: 16px 0;
   }
   .table-wrap { overflow-x: auto; margin: 12px 0; }
+  .note table { background: var(--paper); }
+  .note p { margin: 0 0 8px; }
   table { border-collapse: collapse; width: 100%; min-width: 560px; }
   caption { text-align: left; font-weight: 700; padding-bottom: 8px; }
   th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--light2); }
@@ -188,8 +190,8 @@
         <tr><th scope="col">Le calque</th><th scope="col">Le nom à lui donner</th><th scope="col">Exemple</th></tr>
       </thead>
       <tbody>
-        <tr><td>La frame de l'écran</td><td>Écran – Page</td><td>Mobile – Fiche produit · Tablette – Fiche produit · Desktop – Fiche produit</td></tr>
-        <tr><td>La photo principale</td><td>Photo produit</td><td>Photo produit</td></tr>
+        <tr><td>La frame de l'écran</td><td>Écran – Page</td><td>Mobile – Fiche produit · Tablette – Fiche offre · Desktop – Fiche atelier</td></tr>
+        <tr><td>La photo principale</td><td>Photo + ce qu'elle montre</td><td>Photo produit · Photo de l'offre · Visuel de l'atelier</td></tr>
         <tr><td>Le bloc nom + prix + bouton</td><td>Infos produit</td><td>Infos produit</td></tr>
         <tr><td>Le titre de la page (H1)</td><td>Titre H1 – ce qu'il contient</td><td>Titre H1 – Nom du produit</td></tr>
         <tr><td>Le prix</td><td>Prix</td><td>Prix</td></tr>
@@ -212,8 +214,25 @@
 </section>
 
 <section id="mobile" aria-labelledby="t-mobile">
-  <h2 id="t-mobile">Partie 1 · La fiche produit en mobile</h2>
+  <h2 id="t-mobile">Partie 1 · Votre page détail en mobile</h2>
   <p>Vous partez de votre propre page mobile, de préférence la liste ou la fiche produit. Deux cas : <strong>A</strong> si votre page existe déjà dans Figma, <strong>B</strong> si vous n'avez que vos croquis papier. Les deux arrivent au même résultat. L'exemple utilisé est une fiche produit.</p>
+
+  <div class="note">
+    <p><strong>Votre page s'appelle autrement ?</strong> Pas de souci : chaque projet a une page qui présente un seul élément en détail. Elle a toujours la même structure : <strong>une image, un bloc d'infos, un bouton principal</strong>. Les gestes sont les mêmes, seuls les noms changent.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Mon projet</th><th scope="col">Ma page détail</th><th scope="col">L'image</th><th scope="col">Le prix</th><th scope="col">Le bouton principal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Une boutique</td><td>Fiche produit</td><td>Photo produit</td><td>Prix</td><td>Bouton – Ajouter au panier</td></tr>
+          <tr><td>Une location, une réservation</td><td>Fiche offre (avec le calendrier)</td><td>Photo de l'offre</td><td>Tarif</td><td>Bouton – Réserver</td></tr>
+          <tr><td>Un service, un atelier</td><td>Fiche atelier ou Fiche prestation</td><td>Visuel de l'atelier</td><td>Tarif</td><td>Bouton – S'inscrire ou Bouton – Demander un devis</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Dans toute la to-do, remplacez « Fiche produit » par le nom de votre page : <span class="opt">Mobile – Fiche offre</span>, <span class="opt">Desktop – Fiche atelier</span>… Vous préférez travailler votre <strong>page liste</strong> ? Allez directement à la <a href="#galerie">Partie 4</a> : une liste de produits ou d'offres est une galerie de cartes.</p>
+  </div>
 
   <h3>Cas A · Ma page mobile existe déjà dans Figma</h3>
   <ul class="tasks">
