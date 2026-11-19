@@ -145,6 +145,7 @@
     <li><a href="#desktop">2 · Desktop</a></li>
     <li><a href="#tablette">3 · Tablette</a></li>
     <li><a href="#galerie">4 · Galerie</a></li>
+    <li><a href="#burger">5 · Menu burger</a></li>
     <li><a href="#pieges">Quand ça ne marche pas</a></li>
     <li><a href="#fini">C'est fini quand</a></li>
   </ul>
@@ -196,6 +197,10 @@
         <tr><td>La galerie d'images</td><td>Galerie</td><td>Galerie</td></tr>
         <tr><td>Chaque image de la galerie</td><td>Image + numéro</td><td>Image 1, Image 2… Image 5</td></tr>
         <tr><td>Un formulaire, un champ</td><td>Formulaire – nom ; Champ – nom</td><td>Formulaire – Réservation ; Champ – Date d'arrivée</td></tr>
+        <tr><td>Le bloc photo + infos</td><td>Contenu</td><td>Contenu</td></tr>
+        <tr><td>La barre du haut</td><td>En-tête</td><td>En-tête (avec Logo et Panier dedans)</td></tr>
+        <tr><td>Les liens du menu</td><td>Menu – Liens</td><td>Menu – Liens (Accueil, Collections…)</td></tr>
+        <tr><td>Le bouton du menu mobile</td><td>Bouton – Menu burger</td><td>Bouton – Menu burger (avec Icône burger dedans)</td></tr>
       </tbody>
     </table>
   </div>
@@ -215,6 +220,7 @@
     <li><label><input type="checkbox"><span>Je clique sur le nom de ma frame mobile et j'appuie sur <kbd>Ctrl</kbd> + <kbd>D</kbd> : je travaille sur la copie, mon wireframe d'origine reste intact.</span></label></li>
     <li><label><input type="checkbox"><span>Je renomme la copie <span class="opt">Mobile – Fiche produit</span> (ou <span class="opt">Mobile – Liste</span>) et l'original <span class="opt">Wireframe d'origine</span>.</span></label></li>
     <li><label><input type="checkbox"><span>Si mes éléments sont groupés (calque « Group »), je sélectionne le groupe et j'appuie sur <kbd>Ctrl</kbd> + <kbd>Maj</kbd> + <kbd>G</kbd> pour dégrouper.</span></label></li>
+    <li><label><input type="checkbox"><span>Un badge ou une icône est posé par-dessus une image (« -20 % », cœur des favoris) ? En basse fidélité, je le place à côté de l'image : la mise en page automatique ne superpose pas les éléments.</span></label></li>
     <li><label><input type="checkbox"><span>Je renomme mes calques avec le tableau <a href="#calques">Nommer ses calques</a> : <span class="opt">Photo produit</span>, <span class="opt">Titre H1 – Nom du produit</span>, <span class="opt">Prix</span>…</span></label></li>
     <li><label><input type="checkbox"><span>Je passe directement à l'étape 2. Après le <kbd>Maj</kbd> + <kbd>A</kbd> de l'étape 3, Figma range mes éléments selon leur position : je vérifie l'ordre de lecture.</span></label></li>
   </ul>
@@ -247,18 +253,21 @@
     <li><label><input type="checkbox"><span>Si un élément n'est pas à sa place, je le sélectionne et je le déplace avec les flèches du clavier.</span></label></li>
   </ul>
 
-  <h3>4. Étirer la photo et le bouton</h3>
+  <h3>4. Étirer la photo, le titre et le bouton</h3>
   <ul class="tasks">
     <li><label><input type="checkbox"><span>Je sélectionne <span class="opt">Photo produit</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Je sélectionne <span class="opt">Titre H1 – Nom du produit</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>, et je laisse <strong>H</strong> en <span class="opt">Ajuster au contenu</span> : un nom long passe à la ligne au lieu de déborder.</span></label></li>
     <li><label><input type="checkbox"><span>Je sélectionne <span class="opt">Bouton – Ajouter au panier</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span> : pleine largeur, facile à toucher avec le pouce.</span></label></li>
     <li><label><input type="checkbox"><span>Test : j'étire puis je rétrécis la frame par son bord droit. La photo et le bouton suivent. Je remets la largeur d'origine dans <strong>W</strong>.</span></label></li>
   </ul>
 
-  <h3>5. Regrouper les infos</h3>
+  <h3>5. Regrouper les infos, puis le contenu</h3>
   <ul class="tasks">
     <li><label><input type="checkbox"><span>Je sélectionne le titre, le prix et le bouton (clic, puis <kbd>Maj</kbd> + clic) et j'appuie sur <kbd>Maj</kbd> + <kbd>A</kbd>.</span></label></li>
     <li><label><input type="checkbox"><span>Je renomme ce bloc <span class="opt">Infos produit</span>.</span></label></li>
-    <li><label><input type="checkbox"><span>Je vérifie les calques : <span class="opt">Mobile – Fiche produit</span> contient <span class="opt">Photo produit</span> et <span class="opt">Infos produit</span>, qui contient le titre, le prix et le bouton.</span></label></li>
+    <li><label><input type="checkbox"><span>Je sélectionne <span class="opt">Photo produit</span> et <span class="opt">Infos produit</span>, j'appuie sur <kbd>Maj</kbd> + <kbd>A</kbd> et je renomme ce bloc <span class="opt">Contenu</span>. Puis menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Ma page a un en-tête (logo, burger, panier) ou un pied de page ? Il reste <strong>en dehors</strong> du bloc Contenu, au-dessus ou en dessous. C'est ce qui permettra de ne passer que le contenu en côte à côte en desktop.</span></label></li>
+    <li><label><input type="checkbox"><span>Je vérifie les calques : <span class="opt">Mobile – Fiche produit</span> contient (l'en-tête s'il existe, puis) <span class="opt">Contenu</span>, qui contient <span class="opt">Photo produit</span> et <span class="opt">Infos produit</span>.</span></label></li>
     <li><label><input type="checkbox"><span>Textes lisibles (section <span class="opt">Typographie</span>) : prix et bouton à 16 px minimum, titre H1 à environ 24 px.</span></label></li>
   </ul>
 </section>
@@ -268,10 +277,10 @@
   <ul class="tasks">
     <li><label><input type="checkbox"><span>Je clique sur le nom <span class="opt">Mobile – Fiche produit</span> et j'appuie sur <kbd>Ctrl</kbd> + <kbd>D</kbd>.</span></label></li>
     <li><label><input type="checkbox"><span>Je tape 1280 dans <strong>W</strong> et je renomme la copie <span class="opt">Desktop – Fiche produit</span>. Constat : tout est empilé dans une colonne trop large.</span></label></li>
-    <li><label><input type="checkbox"><span>La frame sélectionnée : <span class="opt">Flux</span> › la flèche vers la droite. La photo et les infos se mettent côte à côte.</span></label></li>
+    <li><label><input type="checkbox"><span>Je sélectionne le bloc <span class="opt">Contenu</span> (pas la frame) : <span class="opt">Flux</span> › la flèche vers la droite. La photo et les infos se mettent côte à côte, et l'en-tête reste en haut sur toute la largeur.</span></label></li>
     <li><label><input type="checkbox"><span><span class="opt">Photo produit</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>. Si elle est trop plate : <strong>H</strong> = 500.</span></label></li>
     <li><label><input type="checkbox"><span><span class="opt">Infos produit</span> › <strong>W</strong> = 400 (<span class="opt">Largeur fixe</span>).</span></label></li>
-    <li><label><input type="checkbox"><span>Sur la frame : <span class="opt">Espace</span> 48, <span class="opt">Marges</span> 64.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Marges</span> 64 sur la frame, <span class="opt">Espace</span> 48 sur le bloc <span class="opt">Contenu</span>.</span></label></li>
     <li><label><input type="checkbox"><span><span class="opt">Bouton – Ajouter au panier</span> › menu de <strong>W</strong> › <span class="opt">Ajuster au contenu</span> : en desktop, le bouton ne s'étire pas.</span></label></li>
     <li><label><input type="checkbox"><span>Titre H1 à environ 32 px.</span></label></li>
   </ul>
@@ -282,11 +291,11 @@
   <ul class="tasks">
     <li><label><input type="checkbox"><span>Je clique sur le nom <span class="opt">Desktop – Fiche produit</span>, <kbd>Ctrl</kbd> + <kbd>D</kbd>, je tape 768 dans <strong>W</strong> et je renomme la copie <span class="opt">Tablette – Fiche produit</span>.</span></label></li>
     <li><label><input type="checkbox"><span>Constat : la photo est écrasée et le titre déborde. Les réglages du desktop ne tiennent pas sur 768 px.</span></label></li>
-    <li><label><input type="checkbox"><span>Sur la frame : <span class="opt">Marges</span> 32, <span class="opt">Espace</span> 24.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Marges</span> 32 sur la frame, <span class="opt">Espace</span> 24 sur le bloc <span class="opt">Contenu</span>.</span></label></li>
     <li><label><input type="checkbox"><span><span class="opt">Infos produit</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span> : la photo et les infos se partagent l'écran.</span></label></li>
     <li><label><input type="checkbox"><span><span class="opt">Photo produit</span> › <strong>H</strong> = 340.</span></label></li>
-    <li><label><input type="checkbox"><span>Le titre déborde encore ? Je le sélectionne : menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>, et je laisse <strong>H</strong> en <span class="opt">Ajuster au contenu</span>. Il passe à la ligne.</span></label></li>
-    <li><label><input type="checkbox"><span>Autre choix possible : <span class="opt">Flux</span> › la flèche vers le bas (photo au-dessus, infos dessous).</span></label></li>
+    <li><label><input type="checkbox"><span>Le titre déborde encore ? Je vérifie qu'il est bien en <span class="opt">Remplir le contenant</span> en largeur et en <span class="opt">Ajuster au contenu</span> en hauteur (étape 4).</span></label></li>
+    <li><label><input type="checkbox"><span>Autre choix possible : bloc <span class="opt">Contenu</span> › <span class="opt">Flux</span> › la flèche vers le bas (photo au-dessus, infos dessous).</span></label></li>
     <li><label><input type="checkbox"><span>Je compare mes 3 frames : même ordre de lecture, un seul bouton principal, même hiérarchie.</span></label></li>
   </ul>
 </section>
@@ -323,6 +332,41 @@
   <p class="note"><strong>Autre méthode :</strong> <span class="opt">Flux</span> › les 4 petits carrés (grille). On choisit soi-même 5, 3 ou 1 colonne pour chaque écran, sans passage automatique à la ligne.</p>
 </section>
 
+<section id="burger" aria-labelledby="t-burger">
+  <h2 id="t-burger">Bonus · Partie 5 · Du menu desktop au menu burger</h2>
+  <p>En desktop, les liens du menu sont visibles en haut. En mobile, ils se rangent derrière un bouton « Menu ». On construit <strong>un seul en-tête</strong>, puis on choisit, écran par écran, ce qu'on affiche et ce qu'on masque.</p>
+
+  <h3>1. Construire l'en-tête (dans Desktop – Fiche produit)</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Avec <kbd>T</kbd>, j'écris 6 textes : « Logo », « Accueil », « Collections », « Nouveautés », « Contact », « Panier ». Je renomme les calques <span class="opt">Logo</span> et <span class="opt">Panier</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Je sélectionne les 4 liens, <kbd>Maj</kbd> + <kbd>A</kbd>, <span class="opt">Flux</span> › la flèche vers la droite, <span class="opt">Espace</span> 32. Je renomme le bloc <span class="opt">Menu – Liens</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>L'icône : 3 rectangles gris de 24 × 3 px l'un sous l'autre, <kbd>Maj</kbd> + <kbd>A</kbd>, <span class="opt">Flux</span> › la flèche vers le bas, <span class="opt">Espace</span> 4. Je renomme le bloc <span class="opt">Icône burger</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Un texte « Menu » à côté de l'icône. Je sélectionne <span class="opt">Icône burger</span> et le texte, <kbd>Maj</kbd> + <kbd>A</kbd>, <span class="opt">Flux</span> › la flèche vers la droite, <span class="opt">Espace</span> 8, <span class="opt">Marges</span> 12. Je renomme le bloc <span class="opt">Bouton – Menu burger</span>. Le mot « Menu » est obligatoire : une icône seule ne suffit pas (réflexe 4).</span></label></li>
+    <li><label><input type="checkbox"><span>Je vérifie que <span class="opt">Bouton – Menu burger</span> fait au moins 44 px de haut, pour le pouce.</span></label></li>
+    <li><label><input type="checkbox"><span>Je sélectionne <span class="opt">Logo</span>, <span class="opt">Menu – Liens</span>, <span class="opt">Bouton – Menu burger</span> et <span class="opt">Panier</span>, <kbd>Maj</kbd> + <kbd>A</kbd>, <span class="opt">Flux</span> › la flèche vers la droite. Je renomme le bloc <span class="opt">En-tête</span>.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">En-tête</span> : dans <span class="opt">Alignement</span>, je clique sur le point du milieu (centré verticalement). Dans le menu d'<span class="opt">Espace</span>, je choisis <span class="opt">Auto</span> si l'option est proposée : les éléments se répartissent sur toute la largeur.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">En-tête</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>. Dans les calques, je le fais glisser tout en haut de la frame, au-dessus de <span class="opt">Contenu</span>.</span></label></li>
+  </ul>
+
+  <h3>2. Choisir ce qu'on affiche sur chaque écran</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span><strong>Desktop</strong> : je masque <span class="opt">Bouton – Menu burger</span>. Dans les calques, je survole son nom et je clique sur l'<strong>œil</strong> (ou <kbd>Ctrl</kbd> + <kbd>Maj</kbd> + <kbd>H</kbd>). Un élément masqué ne prend plus de place.</span></label></li>
+    <li><label><input type="checkbox"><span>Je copie l'en-tête : je sélectionne <span class="opt">En-tête</span>, <kbd>Ctrl</kbd> + <kbd>C</kbd>, je clique sur le nom de la frame <span class="opt">Mobile – Fiche produit</span>, <kbd>Ctrl</kbd> + <kbd>V</kbd>. Dans les calques, je le place tout en haut. Pareil pour la tablette.</span></label></li>
+    <li><label><input type="checkbox"><span><strong>Mobile</strong> : je masque <span class="opt">Menu – Liens</span> (l'œil) et j'affiche <span class="opt">Bouton – Menu burger</span> (l'œil à nouveau).</span></label></li>
+    <li><label><input type="checkbox"><span><strong>Tablette</strong> : au choix. Si les 4 liens tiennent sur la largeur, je les garde ; sinon, je fais comme en mobile.</span></label></li>
+  </ul>
+
+  <h3>3. Le menu ouvert, en mobile</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je duplique <span class="opt">Mobile – Fiche produit</span> (<kbd>Ctrl</kbd> + <kbd>D</kbd>) et je renomme la copie <span class="opt">Mobile – Menu ouvert</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Dans les calques, je fais glisser <span class="opt">Menu – Liens</span> hors de <span class="opt">En-tête</span>, juste en dessous de lui. J'affiche <span class="opt">Menu – Liens</span> et je masque <span class="opt">Contenu</span>.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Menu – Liens</span> : <span class="opt">Flux</span> › la flèche vers le bas, menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>, <span class="opt">Espace</span> 0.</span></label></li>
+    <li><label><input type="checkbox"><span>Chaque lien : je le sélectionne, <kbd>Maj</kbd> + <kbd>A</kbd>, <span class="opt">Marges</span> 12 en haut et en bas, et <strong>W</strong> en <span class="opt">Remplir le contenant</span>. Chaque lien fait ainsi au moins 44 px de haut.</span></label></li>
+    <li><label><input type="checkbox"><span>Dans le bouton, je remplace le texte « Menu » par « Fermer ».</span></label></li>
+    <li><label><input type="checkbox"><span>Je vérifie : en mobile, j'ai deux frames, <span class="opt">Mobile – Fiche produit</span> (menu fermé) et <span class="opt">Mobile – Menu ouvert</span>.</span></label></li>
+  </ul>
+</section>
+
 <section id="pieges" aria-labelledby="t-pieges">
   <h2 id="t-pieges">Quand ça ne marche pas</h2>
   <div class="table-wrap">
@@ -334,6 +378,8 @@
         <tr><td>« Remplir le contenant » n'est pas dans le menu de W</td><td>Le cadre parent n'est pas en mise en page automatique</td><td>Je sélectionne le parent (clic sur son nom), <kbd>Maj</kbd> + <kbd>A</kbd>, puis je reviens sur l'élément</td></tr>
         <tr><td>Toujours pas de « Remplir le contenant »</td><td>L'élément est posé à côté de la frame, pas dedans</td><td>Je le fais glisser dans la frame, ou sur le nom de la frame dans les calques</td></tr>
         <tr><td>Un cadre bleu entoure un seul élément</td><td>J'ai fait <kbd>Maj</kbd> + <kbd>A</kbd> sur l'élément, pas sur la frame</td><td><kbd>Ctrl</kbd> + <kbd>Z</kbd>, puis clic sur le nom de la frame avant <kbd>Maj</kbd> + <kbd>A</kbd></td></tr>
+        <tr><td>En desktop, tout se met côte à côte, même l'en-tête</td><td>J'ai passé la frame en horizontal au lieu du bloc Contenu</td><td>Frame en flux vertical, bloc Contenu en flux horizontal</td></tr>
+        <tr><td>Le menu masqué laisse un vide ou ne disparaît pas</td><td>J'ai masqué un autre calque que celui du menu</td><td>Dans les calques, je vérifie l'œil de <span class="opt">Menu – Liens</span> ou de <span class="opt">Bouton – Menu burger</span></td></tr>
         <tr><td>Un élément ne suit pas quand j'étire</td><td>Il est en « Largeur fixe »</td><td>Menu de W › Remplir le contenant</td></tr>
         <tr><td>Le titre déborde sur une seule ligne</td><td>Il est en « Ajuster au contenu » en largeur (étiquette « Ajustement × Ajustement »)</td><td>W en Remplir le contenant, H en Ajuster au contenu</td></tr>
         <tr><td>Ma galerie devient une colonne de 200 px</td><td>J'ai tapé 200 dans W, sur le bloc au lieu des images</td><td>Galerie en Remplir le contenant, puis 200 dans « Largeur minimale » des 5 images</td></tr>
