@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuto Figma · Mise en page automatique · Du mobile au desktop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1C2035;
+    --paper: #FFFDF8;
+    --light: #F7F4EE;
+    --light2: #ECE5D8;
+    --accent: #F2B13A;
+    --teal: #0B6466;
+    --muted: #4A4F63;
+    --red: #A3271F;
+    --green: #1E6B3A;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 112.5%; }
+  body {
+    margin: 0;
+    font-family: "Atkinson Hyperlegible", Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--light);
+  }
+  .skip {
+    position: absolute; left: -999px; top: 0;
+    background: var(--ink); color: var(--paper); padding: 12px 18px; z-index: 10;
+  }
+  .skip:focus { left: 12px; top: 12px; }
+  header {
+    background: var(--ink); color: var(--paper);
+    padding: 40px 24px 32px;
+  }
+  header .wrap, main, footer .wrap { max-width: 920px; margin: 0 auto; }
+  .kicker { margin: 0 0 8px; color: var(--accent); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: .85rem; }
+  h1, h2, h3 { font-family: "Space Grotesk", Arial, sans-serif; line-height: 1.2; }
+  h1 { margin: 0 0 12px; font-size: clamp(1.8rem, 5vw, 2.6rem); }
+  header p { margin: 0; max-width: 68ch; }
+  .progress { margin-top: 24px; }
+  .progress label { font-weight: 700; display: block; margin-bottom: 6px; }
+  progress {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 18px;
+    border: 2px solid var(--paper); border-radius: 9px;
+    background: var(--light2); overflow: hidden;
+  }
+  progress::-webkit-progress-bar { background: var(--light2); }
+  progress::-webkit-progress-value { background: var(--teal); }
+  progress::-moz-progress-bar { background: var(--teal); }
+  nav { background: var(--paper); border-bottom: 2px solid var(--light2); padding: 12px 24px; position: sticky; top: 0; z-index: 5; }
+  nav ul { max-width: 920px; margin: 0 auto; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 16px; }
+  nav a { color: var(--teal); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  main { padding: 24px; }
+  section {
+    background: var(--paper); border: 2px solid var(--light2); border-radius: 14px;
+    padding: 24px 28px; margin: 0 0 24px;
+  }
+  h2 { margin: 0 0 12px; font-size: 1.6rem; }
+  h3 { margin: 24px 0 8px; font-size: 1.2rem; }
+  p { max-width: 70ch; }
+  .note {
+    background: var(--light); border-left: 6px solid var(--accent);
+    padding: 12px 16px; border-radius: 6px; margin: 16px 0;
+  }
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; }
+  caption { text-align: left; font-weight: 700; padding-bottom: 8px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--light2); }
+  th { background: var(--ink); color: var(--paper); }
+  tbody tr:nth-child(even) { background: var(--light); }
+  .tasks { list-style: none; padding: 0; margin: 8px 0; }
+  .tasks li { margin: 0 0 6px; }
+  .tasks label {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 12px; border-radius: 8px; cursor: pointer;
+    min-height: 44px;
+  }
+  .tasks label:hover { background: var(--light); }
+  .tasks input {
+    flex: 0 0 auto; width: 24px; height: 24px; margin: 2px 0 0;
+    accent-color: var(--teal); cursor: pointer;
+  }
+  .tasks input:checked + span { color: var(--muted); text-decoration: line-through; }
+  kbd {
+    font-family: inherit; font-weight: 700; font-size: .9em;
+    color: var(--ink);
+    background: var(--light); border: 1px solid var(--muted); border-bottom-width: 3px;
+    border-radius: 6px; padding: 0 6px; white-space: nowrap;
+  }
+  .opt { font-weight: 700; }
+  a:focus-visible, input:focus-visible, button:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+  button {
+    font: inherit; font-weight: 700; cursor: pointer;
+    min-height: 44px; padding: 10px 18px; border-radius: 10px;
+    border: 2px solid var(--ink); background: var(--paper); color: var(--ink);
+  }
+  button.primary { background: var(--ink); color: var(--paper); }
+  footer { padding: 24px; color: var(--muted); }
+  section { scroll-margin-top: 110px; }
+  @media (max-width: 600px) {
+    nav { position: static; }
+    section { padding: 18px 16px; scroll-margin-top: 12px; }
+    main { padding: 16px; }
+  }
+  @media print {
+    nav, .actions, .progress, .skip { display: none; }
+    body { background: #fff; }
+    section { break-inside: avoid; border-color: #ccc; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+  }
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Label École · CDP3 Roubaix · 20 novembre 2026</p>
+    <h1>Tuto Figma : la mise en page automatique, du mobile au desktop</h1>
+    <p>Vous construisez une page mobile une seule fois, puis vous la déclinez en tablette et en desktop sans tout redessiner. Restez en basse fidélité : noir, blanc et gris, des rectangles gris pour les images, une seule police. Sur Mac, remplacez <kbd>Ctrl</kbd> par <kbd>Cmd</kbd>.</p>
+    <div class="progress">
+      <label for="barre">Ma progression : <span id="compteur">0</span> étape(s) cochée(s) sur <span id="total">0</span></label>
+      <progress id="barre" value="0" max="1"></progress>
+    </div>
+  </div>
+</header>
+
+<nav aria-label="Sommaire">
+  <ul>
+    <li><a href="#options">Les options</a></li>
+    <li><a href="#calques">Nommer ses calques</a></li>
+    <li><a href="#mobile">1 · Mobile</a></li>
+    <li><a href="#desktop">2 · Desktop</a></li>
+    <li><a href="#tablette">3 · Tablette</a></li>
+    <li><a href="#galerie">4 · Galerie</a></li>
+    <li><a href="#pieges">Quand ça ne marche pas</a></li>
+    <li><a href="#fini">C'est fini quand</a></li>
+  </ul>
+</nav>
+
+<main id="contenu">
+
+<section id="options" aria-labelledby="t-options">
+  <h2 id="t-options">Les options exactes de Figma</h2>
+  <p>Toutes ces options sont dans le panneau de droite, onglet <span class="opt">Design</span>. Selon votre version de Figma, « Remplir le contenant » peut s'appeler « Remplir le conteneur ».</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Option dans Figma</th><th scope="col">Où la trouver</th><th scope="col">À quoi elle sert</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="opt">Mise en page automatique</td><td>Raccourci <kbd>Maj</kbd> + <kbd>A</kbd> ; section du même nom</td><td>Range les éléments tout seul</td></tr>
+        <tr><td class="opt">Flux : flèche vers le bas</td><td>Mise en page automatique › Flux, 2e icône</td><td>Vertical : on empile (mobile)</td></tr>
+        <tr><td class="opt">Flux : flèche vers la droite</td><td>Mise en page automatique › Flux, 3e icône</td><td>Horizontal : côte à côte (desktop)</td></tr>
+        <tr><td class="opt">Flux : 4 petits carrés</td><td>Mise en page automatique › Flux, 4e icône</td><td>Grille : on choisit le nombre de colonnes</td></tr>
+        <tr><td class="opt">Retour à la ligne : flèche courbe</td><td>À droite des icônes de Flux</td><td>Les éléments passent à la ligne quand la place manque</td></tr>
+        <tr><td class="opt">Espace</td><td>Mise en page automatique › Espace</td><td>L'espace entre les éléments (2e champ : entre les lignes)</td></tr>
+        <tr><td class="opt">Marges</td><td>Mise en page automatique › Marges</td><td>L'espace entre le bord du cadre et son contenu</td></tr>
+        <tr><td class="opt">Largeur fixe</td><td>Menu de <strong>W</strong> (petite flèche à côté du chiffre)</td><td>La largeur ne bouge jamais</td></tr>
+        <tr><td class="opt">Ajuster au contenu</td><td>Menu de <strong>W</strong> ou de <strong>H</strong></td><td>La taille suit le contenu (un bouton qui suit son texte)</td></tr>
+        <tr><td class="opt">Remplir le contenant</td><td>Menu de <strong>W</strong> ou de <strong>H</strong></td><td>Prend toute la place du cadre parent</td></tr>
+        <tr><td class="opt">Ajouter une largeur minimale…</td><td>Menu de <strong>W</strong></td><td>Crée un champ « Largeur minimale » : en dessous, l'élément passe à la ligne</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>Règle d'or :</strong> « Remplir le contenant » n'apparaît que si l'élément est <strong>à l'intérieur</strong> d'un cadre en mise en page automatique. On règle toujours le parent en premier, puis les enfants.</p>
+</section>
+
+<section id="calques" aria-labelledby="t-calques">
+  <h2 id="t-calques">Nommer ses calques</h2>
+  <p>Pas de « Rectangle 1 » ni de « Frame 12 » : chaque calque dit ce qu'il est. Vous vous y retrouvez, et le développeur comprend votre maquette sans vous demander. Pour renommer, double-cliquez sur le nom du calque, dans le panneau de gauche.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Le calque</th><th scope="col">Le nom à lui donner</th><th scope="col">Exemple</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>La frame de l'écran</td><td>Écran – Page</td><td>Mobile – Fiche produit · Tablette – Fiche produit · Desktop – Fiche produit</td></tr>
+        <tr><td>La photo principale</td><td>Photo produit</td><td>Photo produit</td></tr>
+        <tr><td>Le bloc nom + prix + bouton</td><td>Infos produit</td><td>Infos produit</td></tr>
+        <tr><td>Le titre de la page (H1)</td><td>Titre H1 – ce qu'il contient</td><td>Titre H1 – Nom du produit</td></tr>
+        <tr><td>Le prix</td><td>Prix</td><td>Prix</td></tr>
+        <tr><td>Le cadre du bouton</td><td>Bouton – ce qu'il fait</td><td>Bouton – Ajouter au panier</td></tr>
+        <tr><td>La galerie d'images</td><td>Galerie</td><td>Galerie</td></tr>
+        <tr><td>Chaque image de la galerie</td><td>Image + numéro</td><td>Image 1, Image 2… Image 5</td></tr>
+        <tr><td>Un formulaire, un champ</td><td>Formulaire – nom ; Champ – nom</td><td>Formulaire – Réservation ; Champ – Date d'arrivée</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je renomme mes frames dès que je les crée ou les duplique : sinon une copie s'appelle « Mobile – Fiche produit 2 ».</span></label></li>
+    <li><label><input type="checkbox"><span>Je renomme chaque bloc juste après le <kbd>Maj</kbd> + <kbd>A</kbd>, sinon il s'appelle « Frame ».</span></label></li>
+    <li><label><input type="checkbox"><span>Je relis mon panneau des calques de haut en bas : je dois comprendre ma page rien qu'en le lisant.</span></label></li>
+  </ul>
+</section>
+
+<section id="mobile" aria-labelledby="t-mobile">
+  <h2 id="t-mobile">Partie 1 · La fiche produit en mobile</h2>
+  <p>Vous partez de votre propre page mobile, de préférence la liste ou la fiche produit. Deux cas : <strong>A</strong> si votre page existe déjà dans Figma, <strong>B</strong> si vous n'avez que vos croquis papier. Les deux arrivent au même résultat. L'exemple utilisé est une fiche produit.</p>
+
+  <h3>Cas A · Ma page mobile existe déjà dans Figma</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je clique sur le nom de ma frame mobile et j'appuie sur <kbd>Ctrl</kbd> + <kbd>D</kbd> : je travaille sur la copie, mon wireframe d'origine reste intact.</span></label></li>
+    <li><label><input type="checkbox"><span>Je renomme la copie <span class="opt">Mobile – Fiche produit</span> (ou <span class="opt">Mobile – Liste</span>) et l'original <span class="opt">Wireframe d'origine</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Si mes éléments sont groupés (calque « Group »), je sélectionne le groupe et j'appuie sur <kbd>Ctrl</kbd> + <kbd>Maj</kbd> + <kbd>G</kbd> pour dégrouper.</span></label></li>
+    <li><label><input type="checkbox"><span>Je renomme mes calques avec le tableau <a href="#calques">Nommer ses calques</a> : <span class="opt">Photo produit</span>, <span class="opt">Titre H1 – Nom du produit</span>, <span class="opt">Prix</span>…</span></label></li>
+    <li><label><input type="checkbox"><span>Je passe directement à l'étape 2. Après le <kbd>Maj</kbd> + <kbd>A</kbd> de l'étape 3, Figma range mes éléments selon leur position : je vérifie l'ordre de lecture.</span></label></li>
+  </ul>
+
+  <h3>Cas B · Je pars de mes croquis papier</h3>
+  <p>Je redessine ma page directement dans Figma avec l'étape 1, puis je continue avec les étapes 2 à 5.</p>
+
+  <h3>1. Préparer l'écran (cas B uniquement)</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>J'appuie sur <kbd>F</kbd> et je choisis une frame mobile dans la liste de droite (par exemple <span class="opt">iPhone 16</span>, 393 × 852). Le modèle exact n'a pas d'importance.</span></label></li>
+    <li><label><input type="checkbox"><span>Je la renomme <span class="opt">Mobile – Fiche produit</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Dans la frame, l'un sous l'autre : un rectangle gris (<kbd>R</kbd>) pour la photo, un texte (<kbd>T</kbd>) pour le nom du produit, un texte pour le prix, un texte « Ajouter au panier ». J'appuie sur <kbd>Échap</kbd> après chaque texte.</span></label></li>
+    <li><label><input type="checkbox"><span>Je renomme le rectangle <span class="opt">Photo produit</span>, le nom <span class="opt">Titre H1 – Nom du produit</span>, le prix <span class="opt">Prix</span>.</span></label></li>
+  </ul>
+
+  <h3>2. Le bouton (cas A et B)</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je clique une fois sur le texte « Ajouter au panier » et j'appuie sur <kbd>Maj</kbd> + <kbd>A</kbd>.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Marges</span> : 24 à gauche et à droite, 16 en haut et en bas.</span></label></li>
+    <li><label><input type="checkbox"><span>Section <span class="opt">Remplissage</span> › <span class="opt">+</span> : un gris clair. Pas de couleur, on reste en basse fidélité.</span></label></li>
+    <li><label><input type="checkbox"><span>Je renomme le cadre <span class="opt">Bouton – Ajouter au panier</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Test : je change le texte, le bouton s'adapte. C'est « <span class="opt">Ajuster au contenu</span> ».</span></label></li>
+  </ul>
+
+  <h3>3. Empiler la page</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je clique sur le <strong>nom de la frame</strong>, au-dessus de l'écran, pour sélectionner la frame et pas un élément à l'intérieur.</span></label></li>
+    <li><label><input type="checkbox"><span>J'appuie sur <kbd>Maj</kbd> + <kbd>A</kbd>.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Flux</span> : la flèche vers le bas. <span class="opt">Espace</span> : 16. <span class="opt">Marges</span> : 16.</span></label></li>
+    <li><label><input type="checkbox"><span>Si un élément n'est pas à sa place, je le sélectionne et je le déplace avec les flèches du clavier.</span></label></li>
+  </ul>
+
+  <h3>4. Étirer la photo et le bouton</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je sélectionne <span class="opt">Photo produit</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Je sélectionne <span class="opt">Bouton – Ajouter au panier</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span> : pleine largeur, facile à toucher avec le pouce.</span></label></li>
+    <li><label><input type="checkbox"><span>Test : j'étire puis je rétrécis la frame par son bord droit. La photo et le bouton suivent. Je remets la largeur d'origine dans <strong>W</strong>.</span></label></li>
+  </ul>
+
+  <h3>5. Regrouper les infos</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je sélectionne le titre, le prix et le bouton (clic, puis <kbd>Maj</kbd> + clic) et j'appuie sur <kbd>Maj</kbd> + <kbd>A</kbd>.</span></label></li>
+    <li><label><input type="checkbox"><span>Je renomme ce bloc <span class="opt">Infos produit</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Je vérifie les calques : <span class="opt">Mobile – Fiche produit</span> contient <span class="opt">Photo produit</span> et <span class="opt">Infos produit</span>, qui contient le titre, le prix et le bouton.</span></label></li>
+    <li><label><input type="checkbox"><span>Textes lisibles (section <span class="opt">Typographie</span>) : prix et bouton à 16 px minimum, titre H1 à environ 24 px.</span></label></li>
+  </ul>
+</section>
+
+<section id="desktop" aria-labelledby="t-desktop">
+  <h2 id="t-desktop">Partie 2 · Le desktop</h2>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je clique sur le nom <span class="opt">Mobile – Fiche produit</span> et j'appuie sur <kbd>Ctrl</kbd> + <kbd>D</kbd>.</span></label></li>
+    <li><label><input type="checkbox"><span>Je tape 1280 dans <strong>W</strong> et je renomme la copie <span class="opt">Desktop – Fiche produit</span>. Constat : tout est empilé dans une colonne trop large.</span></label></li>
+    <li><label><input type="checkbox"><span>La frame sélectionnée : <span class="opt">Flux</span> › la flèche vers la droite. La photo et les infos se mettent côte à côte.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Photo produit</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>. Si elle est trop plate : <strong>H</strong> = 500.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Infos produit</span> › <strong>W</strong> = 400 (<span class="opt">Largeur fixe</span>).</span></label></li>
+    <li><label><input type="checkbox"><span>Sur la frame : <span class="opt">Espace</span> 48, <span class="opt">Marges</span> 64.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Bouton – Ajouter au panier</span> › menu de <strong>W</strong> › <span class="opt">Ajuster au contenu</span> : en desktop, le bouton ne s'étire pas.</span></label></li>
+    <li><label><input type="checkbox"><span>Titre H1 à environ 32 px.</span></label></li>
+  </ul>
+</section>
+
+<section id="tablette" aria-labelledby="t-tablette">
+  <h2 id="t-tablette">Partie 3 · La tablette</h2>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Je clique sur le nom <span class="opt">Desktop – Fiche produit</span>, <kbd>Ctrl</kbd> + <kbd>D</kbd>, je tape 768 dans <strong>W</strong> et je renomme la copie <span class="opt">Tablette – Fiche produit</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Constat : la photo est écrasée et le titre déborde. Les réglages du desktop ne tiennent pas sur 768 px.</span></label></li>
+    <li><label><input type="checkbox"><span>Sur la frame : <span class="opt">Marges</span> 32, <span class="opt">Espace</span> 24.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Infos produit</span> › menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span> : la photo et les infos se partagent l'écran.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Photo produit</span> › <strong>H</strong> = 340.</span></label></li>
+    <li><label><input type="checkbox"><span>Le titre déborde encore ? Je le sélectionne : menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>, et je laisse <strong>H</strong> en <span class="opt">Ajuster au contenu</span>. Il passe à la ligne.</span></label></li>
+    <li><label><input type="checkbox"><span>Autre choix possible : <span class="opt">Flux</span> › la flèche vers le bas (photo au-dessus, infos dessous).</span></label></li>
+    <li><label><input type="checkbox"><span>Je compare mes 3 frames : même ordre de lecture, un seul bouton principal, même hiérarchie.</span></label></li>
+  </ul>
+</section>
+
+<section id="galerie" aria-labelledby="t-galerie">
+  <h2 id="t-galerie">Partie 4 · Une galerie qui passe à la ligne (page liste)</h2>
+  <p>5 images sur une ligne en desktop, 3 puis 2 en tablette, 1 par ligne en mobile : elles se replacent toutes seules.</p>
+
+  <h3>1. Construire la galerie</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span><kbd>F</kbd>, je tape 1280 dans <strong>W</strong>, je renomme la frame <span class="opt">Desktop – Liste</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Je clique sur son nom, <kbd>Maj</kbd> + <kbd>A</kbd>. <span class="opt">Flux</span> : la flèche vers le bas. <span class="opt">Marges</span> : 64.</span></label></li>
+    <li><label><input type="checkbox"><span>Dans la frame, un rectangle gris (<kbd>R</kbd>) de 200 × 200, renommé <span class="opt">Image 1</span>. Puis <kbd>Ctrl</kbd> + <kbd>D</kbd> quatre fois, et je renomme <span class="opt">Image 2</span> à <span class="opt">Image 5</span>.</span></label></li>
+    <li><label><input type="checkbox"><span>Je sélectionne les 5 images, <kbd>Maj</kbd> + <kbd>A</kbd>, je renomme le bloc <span class="opt">Galerie</span>.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Galerie</span> : <span class="opt">Flux</span> › la flèche vers la droite, puis la <span class="opt">flèche courbe</span> (retour à la ligne). <span class="opt">Espace</span> : 16 dans les deux champs.</span></label></li>
+    <li><label><input type="checkbox"><span>Je vérifie dans les calques que <span class="opt">Galerie</span> est décalée sous <span class="opt">Desktop – Liste</span>, donc à l'intérieur. Sinon, je la fais glisser dedans.</span></label></li>
+    <li><label><input type="checkbox"><span><span class="opt">Galerie</span> sélectionnée : menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>.</span></label></li>
+  </ul>
+
+  <h3>2. Régler les images</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>Dans les calques, je déplie <span class="opt">Galerie</span> (petite flèche), je clique sur <span class="opt">Image 1</span> puis <kbd>Maj</kbd> + clic sur <span class="opt">Image 5</span>. Le bloc Galerie, lui, n'est pas sélectionné.</span></label></li>
+    <li><label><input type="checkbox"><span>Menu de <strong>W</strong> › <span class="opt">Remplir le contenant</span>. Le vide à droite disparaît.</span></label></li>
+    <li><label><input type="checkbox"><span>Menu de <strong>W</strong> › <span class="opt">Ajouter une largeur minimale…</span>, puis je tape 200 dans le nouveau champ <span class="opt">Largeur minimale</span>. Pas dans W.</span></label></li>
+    <li><label><input type="checkbox"><span>Test : je réduis la frame avec la poignée de droite. Les images passent à la ligne. Je remets 1280.</span></label></li>
+  </ul>
+
+  <h3>3. Décliner</h3>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span><kbd>Ctrl</kbd> + <kbd>D</kbd>, <strong>W</strong> = 768, renommée <span class="opt">Tablette – Liste</span> : 3 images, puis 2.</span></label></li>
+    <li><label><input type="checkbox"><span><kbd>Ctrl</kbd> + <kbd>D</kbd>, <strong>W</strong> = 393, <span class="opt">Marges</span> 16, renommée <span class="opt">Mobile – Liste</span> : 1 image par ligne.</span></label></li>
+    <li><label><input type="checkbox"><span>Je veux 2 images par ligne en mobile : je sélectionne les 5 images et je baisse la <span class="opt">Largeur minimale</span> à 160.</span></label></li>
+  </ul>
+  <p class="note"><strong>Autre méthode :</strong> <span class="opt">Flux</span> › les 4 petits carrés (grille). On choisit soi-même 5, 3 ou 1 colonne pour chaque écran, sans passage automatique à la ligne.</p>
+</section>
+
+<section id="pieges" aria-labelledby="t-pieges">
+  <h2 id="t-pieges">Quand ça ne marche pas</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Ce que je vois</th><th scope="col">Pourquoi</th><th scope="col">Ce que je fais</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>« Remplir le contenant » n'est pas dans le menu de W</td><td>Le cadre parent n'est pas en mise en page automatique</td><td>Je sélectionne le parent (clic sur son nom), <kbd>Maj</kbd> + <kbd>A</kbd>, puis je reviens sur l'élément</td></tr>
+        <tr><td>Toujours pas de « Remplir le contenant »</td><td>L'élément est posé à côté de la frame, pas dedans</td><td>Je le fais glisser dans la frame, ou sur le nom de la frame dans les calques</td></tr>
+        <tr><td>Un cadre bleu entoure un seul élément</td><td>J'ai fait <kbd>Maj</kbd> + <kbd>A</kbd> sur l'élément, pas sur la frame</td><td><kbd>Ctrl</kbd> + <kbd>Z</kbd>, puis clic sur le nom de la frame avant <kbd>Maj</kbd> + <kbd>A</kbd></td></tr>
+        <tr><td>Un élément ne suit pas quand j'étire</td><td>Il est en « Largeur fixe »</td><td>Menu de W › Remplir le contenant</td></tr>
+        <tr><td>Le titre déborde sur une seule ligne</td><td>Il est en « Ajuster au contenu » en largeur (étiquette « Ajustement × Ajustement »)</td><td>W en Remplir le contenant, H en Ajuster au contenu</td></tr>
+        <tr><td>Ma galerie devient une colonne de 200 px</td><td>J'ai tapé 200 dans W, sur le bloc au lieu des images</td><td>Galerie en Remplir le contenant, puis 200 dans « Largeur minimale » des 5 images</td></tr>
+        <tr><td>Il reste un vide à droite de la galerie</td><td>Les images sont encore en largeur fixe</td><td>Les 5 images › W › Remplir le contenant</td></tr>
+        <tr><td>Le bouton fait toute la largeur en desktop</td><td>Il est resté en Remplir le contenant</td><td>Menu de W › Ajuster au contenu</td></tr>
+        <tr><td>Je ne m'y retrouve plus dans les calques</td><td>Les calques s'appellent « Frame » ou « Rectangle »</td><td>Je les renomme avec le tableau <a href="#calques">Nommer ses calques</a></td></tr>
+        <tr><td>Ma frame mobile n'a pas la même taille que celle du voisin</td><td>Chacun a choisi un téléphone différent</td><td>Aucun problème : mobile, tablette (768) et desktop (1280) suffisent</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="fini" aria-labelledby="t-fini">
+  <h2 id="t-fini">C'est fini quand</h2>
+  <ul class="tasks">
+    <li><label><input type="checkbox"><span>J'ai 3 versions de ma page : Mobile, Tablette et Desktop.</span></label></li>
+    <li><label><input type="checkbox"><span>Chaque calque a un nom clair, sans « Frame » ni « Rectangle ».</span></label></li>
+    <li><label><input type="checkbox"><span>Il y a un seul bouton principal par écran.</span></label></li>
+    <li><label><input type="checkbox"><span>La hiérarchie et l'ordre de lecture sont les mêmes sur les 3 écrans.</span></label></li>
+    <li><label><input type="checkbox"><span>Je suis resté en basse fidélité : noir, blanc, gris.</span></label></li>
+  </ul>
+  <div class="actions">
+    <button type="button" class="primary" onclick="window.print()">Imprimer la to-do</button>
+    <button type="button" id="reset">Tout décocher</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Module 14 · Accessibilité &amp; responsive · Formation Label École. Cette page utilise la police Atkinson Hyperlegible, conçue pour les personnes malvoyantes.</p>
+  </div>
+</footer>
+
+<script>
+  // Compte les cases cochées et garde la progression dans le navigateur (facultatif).
+  (function () {
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('.tasks input[type="checkbox"]'));
+    var bar = document.getElementById('barre');
+    var count = document.getElementById('compteur');
+    var total = document.getElementById('total');
+    var KEY = 'todo-figma-label-ecole';
+    var saved = [];
+    try { saved = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { saved = []; }
+
+    boxes.forEach(function (box, i) {
+      box.id = 'etape-' + i;
+      box.checked = saved[i] === true;
+      box.addEventListener('change', update);
+    });
+
+    function update() {
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      count.textContent = done;
+      total.textContent = boxes.length;
+      bar.max = boxes.length;
+      bar.value = done;
+      try { localStorage.setItem(KEY, JSON.stringify(boxes.map(function (b) { return b.checked; }))); } catch (e) {}
+    }
+
+    document.getElementById('reset').addEventListener('click', function () {
+      boxes.forEach(function (b) { b.checked = false; });
+      update();
+    });
+
+    update();
+  })();
+</script>
+</body>
+</html>
