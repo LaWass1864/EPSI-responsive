@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>To-do Google Sheets : mise en forme, graphiques, impression</title>
+<style>
+  :root { --bg: #FBFBF8; --fg: #14213D; --muted: #4A5568; --rule: #D9DEE3; --accent: #0F766E; --card: #FFFFFF; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: "IBM Plex Sans", Arial, sans-serif; font-size: 16px; line-height: 1.5; padding: 24px 16px 48px; }
+  main { max-width: 720px; margin: 0 auto; }
+  h1 { font-family: "Source Serif 4", Georgia, serif; font-size: 32px; line-height: 1.2; margin: 0 0 8px; }
+  .intro { color: var(--muted); margin: 0 0 24px; }
+  h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 28px 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { border-bottom: 1px solid var(--rule); }
+  label { display: flex; gap: 12px; align-items: flex-start; padding: 12px 2px; cursor: pointer; }
+  input[type="checkbox"] { flex: none; width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); }
+  .step { min-width: 0; }
+  .step strong { display: block; font-weight: 600; }
+  .why { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.95em; background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 1px 6px; overflow-wrap: anywhere; }
+  .tip { background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin: 12px 0 4px; color: var(--muted); font-size: 15px; }
+  @media print { body { padding: 0; } h2 { break-after: avoid; } li { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>To-do Google Sheets : mise en forme, graphiques, impression</h1>
+  <p class="intro">Séance du lundi 23/11. Faites chaque étape dans l'ordre et cochez-la quand elle fonctionne.</p>
+
+  <h2>1. Mise en forme des cellules</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Mettre les montants en format monétaire</strong><span class="why">Sélectionnez la colonne C des montants, puis cliquez sur l'icône € dans la barre d'outils. Les nombres restent les mêmes : seul leur affichage change.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Afficher un pourcentage</strong><span class="why">Dans une cellule vide, tapez 0,1, puis cliquez sur l'icône % : elle s'affiche 10,00 %. Pour enlever les deux zéros, cliquez sur l'icône .0← (réduire les décimales) une ou deux fois : vous obtenez 10 %.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Ajouter des bordures et une couleur d'en-tête</strong><span class="why">Sélectionnez les en-têtes, puis utilisez l'icône de bordures et la couleur de remplissage. Cela rend le tableau plus facile à lire.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Colorer les charges « Élevée » en orange</strong><span class="why">Sélectionnez la plage du niveau des six charges (D3:D8, sans les totaux), puis Format &gt; Règles de mise en forme conditionnelle. Dans « Appliquer à la plage », vérifiez que c'est bien D3:D8 et non toute la colonne. Condition : le texte contient « Élevée ». Style : remplissage orange, puis OK. La couleur se met à jour toute seule si le niveau change.</span></span></label></li>
+  </ul>
+
+  <h2>2. Graphiques</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Sélectionner le tableau des charges</strong><span class="why">Sélectionnez les noms et les montants, sans les totaux.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Créer un histogramme</strong><span class="why">Insertion > Graphique. Un histogramme apparaît automatiquement. Il compare les charges entre elles, une barre par charge.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Ajouter un titre et une légende</strong><span class="why">Cliquez sur le graphique pour le sélectionner, puis sur les trois petits points en haut à droite, puis sur Modifier le graphique. Dans le panneau qui s'ouvre, tapez un titre, par exemple « Charges mensuelles ».</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Créer un graphique en secteurs</strong><span class="why">Même sélection, puis Insertion > Graphique et choisissez Secteurs. Il montre la part de chaque charge dans le total.</span></span></label></li>
+  </ul>
+
+  <h2>3. Collage spécial : coller seulement le résultat</h2>
+  <div class="tip">Une formule recalcule quand les montants changent. Une valeur est un résultat figé. Le collage spécial permet de ne coller que la valeur, sans la formule.</div>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Copier le total C9</strong><span class="why">Cliquez sur C9 (5 400,00 €), puis faites Ctrl+C. Un cadre en pointillés apparaît autour de C9. La copie contient la formule <code>=SOMME(C3:C8)</code>.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Vérifier que H9 est vide</strong><span class="why">Cliquez sur H9, à droite du tableau. Si la cellule affiche quelque chose, appuyez sur Suppr.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Coller les valeurs dans H9</strong><span class="why">Avec H9 sélectionné, faites Ctrl+Maj+V (ou Édition &gt; Collage spécial &gt; Valeurs uniquement). H9 affiche 5 400,00 €.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Vérifier que H9 ne contient plus de formule</strong><span class="why">Cliquez sur H9 et regardez la barre de formule : elle doit afficher 5400, sans signe =. Si elle affiche « =SOMME... », recommencez à partir de l'étape 2.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Faire l'essai avec un collage normal (facultatif)</strong><span class="why">Cliquez sur C9, faites Ctrl+C, puis cliquez sur H10 et faites Ctrl+V simple. H10 affiche 0,00 € et la barre de formule montre <code>=SOMME(H3:H8)</code> : la formule a été recopiée et décalée. Appuyez ensuite sur Suppr sur H10.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Coller seulement le format</strong><span class="why">Copiez une cellule en orange, puis Édition > Collage spécial > Format uniquement sur une autre cellule. La couleur est reprise, pas le contenu.</span></span></label></li>
+  </ul>
+
+  <h2>4. Impression et enregistrement</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Sélectionner le tableau avant d'imprimer</strong><span class="why">Avec la souris, cliquez sur la première cellule du tableau (B2) et faites glisser jusqu'à la dernière cellule, puis jusqu'à la zone du graphique, pour tout sélectionner. Le tableau et le graphique doivent être dans la zone. Ne vous servez pas de Ctrl+clic ou Maj+clic pour le graphique : un graphique n'est pas une cellule, il n'est pas ajouté à la sélection. Un seul glissement de souris suffit. Sans sélection, Sheets imprime toute la feuille.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Ouvrir l'aperçu avant impression</strong><span class="why">Fichier > Imprimer (ou Ctrl+P). Dans le menu de gauche, choisissez « Cellules sélectionnées » au lieu de « Feuille actuelle ». Dans Échelle, choisissez « Ajuster à la page » pour tenir sur une seule feuille.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Télécharger le fichier en PDF</strong><span class="why">Fichier > Télécharger > Document PDF. Le fichier se trouve ensuite dans vos téléchargements.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Télécharger le fichier en .xlsx</strong><span class="why">Fichier > Télécharger > Microsoft Excel (.xlsx). Ce format s'ouvre dans Excel.</span></span></label></li>
+  </ul>
+  <div class="tip">Si le graphique ou la mise en forme disparaît après un collage, annulez avec Ctrl+Z, puis recommencez en choisissant le bon type de collage spécial. Attention : un simple Ctrl+V recopie aussi la formule (et la décale). Pour ne coller que la valeur, faites bien Ctrl+Maj+V. Si une cellule vide (par exemple D16) devient orange après un collage, annulez avec Ctrl+Z, puis vérifiez dans Format &gt; Règles de mise en forme conditionnelle que la règle « Élevée » ne couvre que D3:D8.</div>
+
+  <h2>5. Exercice : charges mensuelles</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Appliquer les quatre étapes au tableau des charges</strong><span class="why">Format monétaire, couleur orange pour « Élevée », histogramme avec titre, puis impression sur une page.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Effacer les formules en trop sur les lignes de totaux</strong><span class="why">Dans l'exercice 1, la formule du niveau et celle du coût annuel ont été recopiées jusqu'aux lignes Total, Moyenne, Max et Min. Sélectionnez D9:D12 et E9:E12, puis appuyez sur Suppr. Gardez seulement les valeurs de la colonne C (5 400, 900, 3 000, 60).</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Télécharger le tableau en PDF</strong><span class="why">Vérifiez que le PDF contient bien le tableau et le graphique, et qu'il tient sur une page.</span></span></label></li>
+  </ul>
+
+  <h2>5 bis. Exercice avancé : charges mensuelles</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Ajouter la colonne « Part du total »</strong><span class="why">En G2, tapez « Part du total ». En G3, tapez =C3/C$9, puis recopiez jusqu'en G8. Mettez la colonne en format pourcentage et réduisez les décimales (.0←). Vérifiez : le loyer représente environ 30 %.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Ajouter deux règles de mise en forme conditionnelle</strong><span class="why">Règle 1 : sélectionnez D3:D8, texte contient « Élevée », remplissage orange. Règle 2 : sélectionnez E3:E8, « est supérieur à » 10000, texte en gras. Vérifiez que chaque règle ne couvre que sa plage.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Rechercher le montant d'une charge</strong><span class="why">En I2, tapez Électricité. En I3, tapez =RECHERCHEV(I2;B3:E8;2;FAUX). Le montant 240,00 € doit apparaître. Remplacez le nom en I2 par Loyer : la valeur change.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Coller seulement la valeur du total</strong><span class="why">Cliquez sur C9, faites Ctrl+C, puis cliquez sur K9 et faites Ctrl+Maj+V. La barre de formule de K9 doit afficher 5400, sans signe =.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Filtrer les charges « Élevée »</strong><span class="why">Utilisez le filtre de la colonne Niveau pour n'afficher que « Élevée ». Puis réaffichez toutes les lignes en retirant le filtre.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Personnaliser les deux graphiques</strong><span class="why">Cliquez sur le graphique, puis sur les trois petits points en haut à droite > Modifier le graphique > onglet Personnaliser. Donnez un titre clair (par exemple « Charges mensuelles » et « Part de chaque charge »), changez la couleur des barres ou des parts, et cochez Libellés de données dans la section Série pour afficher les montants ou les pourcentages. Vérifiez que la légende est lisible.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="step"><strong>Créer les deux graphiques et imprimer</strong><span class="why">Sélectionnez B2:C8 et créez un histogramme, puis un graphique en secteurs, avec un titre. Ensuite, par un seul glissement de souris, sélectionnez le tableau et le graphique, puis Ctrl+P : Cellules sélectionnées, Ajuster à la page, et téléchargez en PDF.</span></span></label></li>
+  </ul>
+
+  <h2>6. Avant de partir</h2>
+  <ul>
+    <li><label><input type="checkbox"><span class="step"><strong>Vérifier que le fichier est dans Mon Drive</strong><span class="why">Le message « Enregistré dans Drive » apparaît en haut de la feuille.</span></span></label></li>
+  </ul>
+</main>
+</body>
+</html>
